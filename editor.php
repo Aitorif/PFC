@@ -34,10 +34,9 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
         var documento = $("#editortxt").val();
         var userid = $("#userid").val();
         // Realizar la solicitud AJAX
-        console.log(123);
         if(id_document == null){
             $.ajax({
-            type: "POST", // Puedes usar POST o GET según tus necesidades
+            type: "POST", 
             url: "guardardocumento.php", 
             data: {
                 titulo: titulo,
@@ -45,14 +44,15 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                 userid: userid
             },
             success: function(response) {
-                // Mostrar la respuesta del servidor en el div "resultado"
+                // Guardar la respuesta de la bd
                 id_document =response;
+                console.log(response);
             }
         })
         }else{
             $.ajax({
                 type: "POST", // Puedes usar POST o GET según tus necesidades
-                url: "guardardocumento.php", // Reemplaza con la URL de tu script PHP
+                url: "guardardocumento.php", 
                 data: {
                     titulo: titulo,
                     documento: documento,
@@ -60,8 +60,8 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                     id_document: id_document
                 },
                 success: function(response) {
-                    // Mostrar la respuesta del servidor en el div "resultado"
-                    $("#resultado").html(response);
+                    
+                    console.log(response);
                 }
             });
         }

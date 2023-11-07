@@ -22,7 +22,6 @@
             exit();
         }
         include('header.php');
-        include('bd.php');
 ?>  
 <main>
         <div id="divLogin">

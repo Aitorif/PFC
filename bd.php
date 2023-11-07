@@ -17,17 +17,20 @@ class Crud {
             $resultado = $this->db->query($sql);
             return $resultado;
         }catch(PDOException $e){
-            return "No se ha podido acceder a la consulta". $e->getMessage();
+            return false;
         }
     }
 
     public function guardarDocumento($documento, $usuario, $titulo){
-        $sql = "CALL CrearNuevoDocumento (:titulo, :documento, :usuario)";
+        date_default_timezone_set('UTC');
+        $sql = "CALL CrearNuevoDocumento (:titulo, :documento, :usuario, :ultima_modificacion)";
+        $fecha = date('Y-m-d');
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
         $stmt->bindParam(':documento', $documento, PDO::PARAM_STR);
         $stmt->bindParam(':usuario', $usuario, PDO::PARAM_INT);
-    
+        $stmt->bindParam(':ultima_modificacion', $fecha, PDO::PARAM_INT);
+        
         try {
             if ($stmt->execute()) {
                 // Recupera el resultado del procedimiento almacenado
