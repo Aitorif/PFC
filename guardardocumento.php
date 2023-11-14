@@ -9,16 +9,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = trim($_POST['userid']);
     if(!isset($_POST["id_document"])){
         $resultado = $Crud->guardarDocumento($documento, $usuario, $titulo);
-        echo $resultado;
     }else{
         $id = $_POST["id_document"];
         $resultado = $Crud->actualizarDocumento($documento, $id);
     }
 
-    /*if($resultado[0] === true){
+    if($resultado[0] === true){
         echo $resultado[1];
     }else{
         echo "Ha habido un error";
-    }*/
+    }
 }
 ?>

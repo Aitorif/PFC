@@ -115,3 +115,7 @@ main{
 #presentacion img{
     width: 500px;
 }
+
+#compartirDoc{
+  display: none;
+}

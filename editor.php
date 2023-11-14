@@ -46,7 +46,6 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
             success: function(response) {
                 // Guardar la respuesta de la bd
                 id_document =response;
-                console.log(response);
             }
         })
         }else{
@@ -61,7 +60,7 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                 },
                 success: function(response) {
                     
-                    console.log(response);
+                    console.log("ok");
                 }
             });
         }
