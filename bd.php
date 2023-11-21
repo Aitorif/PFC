@@ -127,4 +127,39 @@ class Crud {
                 return $e->getMessage();;
         }
     }
+
+    public function compartirDocumento($arraydoc_id, $id_user, $id_trab){
+        $sql = "INSERT IGNORE INTO documento_compartido (id_documento, id_trabajador, id_user) VALUES ";
+        foreach($arraydoc_id as $id_doc){
+            $sql .= "('$id_doc', '$id_trab', '$id_user'),";
+        }
+        $sql = substr($sql, 0, -1);
+        $stmt = $this->db->prepare($sql);
+        try{
+            $insertar = $this->db->prepare($sql);
+                    if($insertar->execute()){
+                        return true;
+                    }else{
+                        return false;
+                    }
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function registrarCita($id_paciente, $id_trabajador, $dia, $hora){
+        $sql = "INSERT IGNORE INTO citas(id_trabajador, id_paciente, dia, hora) VALUES(:id_trabajador, :id_paciente, :dia, :hora)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id_trabajador', $id_trabajador, PDO::PARAM_STR);
+        $stmt->bindParam(':id_paciente', $id_paciente, PDO::PARAM_STR);
+        $stmt->bindParam(':dia', $dia, PDO::PARAM_STR);
+        $stmt->bindParam(':hora', $hora, PDO::PARAM_INT);
+        
+        try {
+            $stmt->execute()
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }

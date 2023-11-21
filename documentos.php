@@ -49,7 +49,22 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
         <div id="documentos" class="">
             <form method="post">
             <table>
-                <tr><td><input id="selTodo" type='checkbox' value=""/></td><td>Título</td><?php if($trabajador == true){echo"<td>Últ. modificacion</td>";}?></tr>
+                <tr><td><input id="selTodo" type='checkbox' value=""/>
+                <?php
+                if($trabajador == true){
+                    echo "
+                        <select id='selector'>
+                        <option value='selecciona'>Selecciona...</option>
+                        <option value='compartir'>Compartir</option>
+                        <option value='borrar'>Borrar</option>
+                        </select>
+                    ";
+                }
+                ?>
+                </td>
+                
+                <td>Título</td><?php if($trabajador == true){echo"<td>Últ. modificacion</td>";}?></tr>
+                
             <?php
 
                 foreach($documentos as $elementos){
@@ -62,16 +77,13 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
 
             ?>
             </table>
-            <?php
-            if($trabajador == true){
-                echo "<input type='button' id='borrar' value='borrar'>";
-                echo "<input type='button' id='compartir' value='compartir'>";
-            }
-            ?>
-            </form>
             <div id="compartirDoc">
-                <?php echo $formShare;?>
+                <label>Email de destino<input type="email" id="email" name="email" required></label>
             </div>
+                <input type="button" id="borrar" value="Borrar">
+                <input type="button" id="compartir" value="Compartir">
+            </form>
+            <p id="error"></p>
         </div>
 
     </div>
@@ -79,8 +91,21 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             -->
         <script>
+            $(document).ready(function() {
                 var user_id = <?php echo $user_id; ?>;
                 var checks = $('.check');
+
+                function emailValidator(email) {
+                    // Expresión regular para validar un correo electrónico
+                    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+                    if (emailRegex.test(email)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
                 $('#selTodo').on('click',function(){
                     
                     if($('#selTodo')[0].checked == true){
@@ -94,12 +119,6 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                     }
                     
                 })
-
-                $('#compartir').on('click', function(){
-
-
-
-                }
 
                 $('#borrar').on('click', function(){
                     
@@ -126,10 +145,62 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                             })
                         }
                     }
-                
-                
                 })
-            
+
+
+                $('#compartir').on('click', function(){
+                    var email = $('#email').val();
+                    var validEmail = emailValidator(email);
+                    var arraydoc_id = []
+                    for (let i=0; i < checks.length; i++) {
+                        if(checks[i].checked == true){
+                            arraydoc_id.push(checks[i].value);
+                        }
+                    }
+                    console.log(arraydoc_id);
+                    if(arraydoc_id.length > 0 && validEmail === true){
+                        var confirmacion = confirm("¿Estás seguro de que quieres compartir los documentos seleccionados con "+email+"?");
+                        if(confirmacion == true){
+                            $.ajax({
+                                type: "POST", 
+                                url: "compartirDocumento.php", 
+                                data: {
+                                    arraydoc_id: arraydoc_id,
+                                    email: email, 
+                                    user_id: user_id
+                                },
+                                success: function(response) {
+                                    console.log(response);
+                                    window.location.reload();
+                                },
+                                error: function(jqXHR){
+                                    console.log(jqXHR.responseText);
+                                }
+                            })
+                        }
+                    }else if(!validEmail){
+                        alert("Debes introducir un email válido");
+                    }else{
+                        alert("No has seleccionado ningún documento para compartir");
+                    }
+                })
+
+                $('#selector').change(function() {
+                    if ($(this).val() === 'compartir') {
+                        $('#compartirDoc').show();
+                        $('#compartir').show();
+                        $('#borrar').hide();
+                    } else if($(this).val() === 'borrar'){
+                        $('#compartirDoc').hide();
+                        $('#compartir').hide();
+                        $('#borrar').show();
+                    }else{
+                        $('#compartirDoc').hide();
+                        $('#compartir').hide();
+                        $('#borrar').hide();
+                    }
+                });
+            });
         </script>
         <?php }?>
 </body>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
+if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged" || $_SESSION['trabajador'] != true){
     header('Location: index.php');
     exit();
 }

@@ -66,3 +66,9 @@ main{
 #compartirDoc{
   display: none;
 }
+#compartir{
+  display: none;
+}
+#borrar{
+  display: none;
+}
