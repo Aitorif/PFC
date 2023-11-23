@@ -156,7 +156,7 @@ class Crud {
         $stmt->bindParam(':hora', $hora, PDO::PARAM_INT);
         
         try {
-            $stmt->execute()
+            $stmt->execute();
             return true;
         } catch (PDOException $e) {
             return $e->getMessage();

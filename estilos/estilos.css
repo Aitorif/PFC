@@ -72,3 +72,51 @@ main{
 #borrar{
   display: none;
 }
+
+#formulario{
+  display: none;
+}
+
+.formularioActivo{
+  display: inline !important;
+  z-index: 999999;
+  position: fixed;
+}
+
+input[type="radio"] {
+  display: none; /* Ocultar los checkboxes por defecto */
+}
+
+/* Estilo para la etiqueta que envuelve al checkbox */
+label.labelHora {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  background-color: #f3f3f3;
+  color: #333;
+  text-align: center;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+label.labelHoraDes {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid #c3c3c3;
+  border-radius: 5px;
+  background-color: #f3f3f3;
+  color: #c3c3c3;
+  text-align: center;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* Cambiar el color de fondo cuando el checkbox está marcado */
+input[type="radio"]:checked + label.labelHora {
+  background-color: #2980b9;
+}
