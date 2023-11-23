@@ -148,13 +148,11 @@ class Crud {
     }
 
     public function registrarCita($id_paciente, $id_trabajador, $dia, $hora){
-        $sql = "INSERT IGNORE INTO citas(id_trabajador, id_paciente, dia, hora) VALUES(:id_trabajador, :id_paciente, :dia, :hora)";
+        $sql = "INSERT IGNORE INTO citas(id_trabajador, id_paciente, dia, hora) VALUES(:id_trabajador, :id_paciente, :dia, '$hora')";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id_trabajador', $id_trabajador, PDO::PARAM_STR);
         $stmt->bindParam(':id_paciente', $id_paciente, PDO::PARAM_STR);
         $stmt->bindParam(':dia', $dia, PDO::PARAM_STR);
-        $stmt->bindParam(':hora', $hora, PDO::PARAM_INT);
-        
         try {
             $stmt->execute();
             return true;
