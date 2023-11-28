@@ -31,6 +31,7 @@
                     <label for="email">Contraseña</label><input type="password" name="contraseña" placeholder="Escribe tu contraseña" required>
                     <input type="submit" name="enviar">
                     <?php if(isset($error)){echo $error;} ?>
-                </form>
+                </form> 
+                <a id="linkLogUp" href="crearUsuario.php">¿Todavía no tienes una cuenta? ¡Regístrate!</a>
         </div>
 </main>

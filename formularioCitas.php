@@ -7,7 +7,13 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
 }
 include('bd.php');
 $Crud = new Crud();
-$result = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos FROM user");
+if($_SESSION['trabajador'] == true){
+    $result = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos FROM user");
+    $peticion = "Paciente";
+}else{
+    $result = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos FROM trabajadores");
+    $peticion = "Logopeda";
+}
 $users = $result->fetchAll();
 $horasres = $Crud->ejecutarConsulta("SELECT hora FROM citas_posibles");
 $horas = $horasres->fetchAll();
@@ -15,8 +21,9 @@ $arrayHoras =  json_encode($horas);
 ?>
 <form action='#'>
     <h3>Pedir cita</h3>
-    <label for='paciente'>Paciente</label>
-    <select name='paciente' id='paciente'>
+    <label for='peticion'><?=$peticion?></label>
+    <select name='peticion' id='peticion'>
+        <option value="0" style="display:none">Selecciona una <?=$peticion?></option>
         <?php foreach($users as $user){
             echo "<option value='".$user['id']."'>".$user['nombre']." ".$user['apellidos']."</option>";
         }?>
@@ -31,20 +38,41 @@ $arrayHoras =  json_encode($horas);
 <script>
     $(document).ready(function() {
         // Detectar cambios en el campo de fecha
-        var horas = <?php echo $arrayHoras; ?>;
-        let trabajador = <?php echo $_SESSION['user_id']?>;
+        let horas = <?php echo $arrayHoras; ?>;
+        let peticion = "<?php echo $peticion;?>";
+        let trabajador, paciente;
+
+        if (peticion == "Paciente") {
+            trabajador = <?php echo $_SESSION['user_id'];?>;
+        } else {
+            paciente = <?php echo $_SESSION['user_id'];?>;
+        }
+
+        $("#peticion").change(function() {
+            if (peticion == "Logopeda") {
+                trabajador = $('select[name=peticion]').val();
+            } else {
+                paciente = $('select[name=peticion]').val();
+            }
+            $("#dia").val("");
+        });
+
         $('#dia').on('input', function() {
             let dia = $(this).val();
-
-            if (dia) {
+            console.log(trabajador);
+            console.log(paciente);
+            if (dia && trabajador && paciente) {
                 $.ajax({
                         url: 'citasPosibles.php',
                         type: 'POST',
                         data: {
-                            dia:dia
+                            dia:dia,
+                            paciente:paciente,
+                            trabajador:trabajador
                         },
                         success: function(response) {
-                            let arrayCitas = JSON.parse(response)
+                            let arrayCitas = JSON.parse(response);
+                            
                             $("#horas").html("");
                             for(let i = 0; i < horas.length; i++){
                                 let diferente = true;
@@ -70,17 +98,18 @@ $arrayHoras =  json_encode($horas);
                         }
                     });
             
-            } else {
+            }else{
             // Si no hay fecha seleccionada
             $('#resultado').text('No hay fecha seleccionada.');
             }
         });
 
+
         $("#guardarCita").on("click", function(){
             event.preventDefault();
             let diaFinal =  $("#dia").val();
             let hora = $('input:radio[name=hora]:checked').val();
-            let paciente = $('select[name=paciente]').val()
+            
             if(hora != undefined || hora != null){
                 $.ajax({
                         url: 'guardarCita.php',
@@ -103,8 +132,8 @@ $arrayHoras =  json_encode($horas);
             }else{
                 alert("Debes de seleccionar día, hora y paciente");
             }
-            
-
         });
+
+        
     })
 </script>

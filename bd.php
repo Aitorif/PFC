@@ -160,4 +160,37 @@ class Crud {
             return $e->getMessage();
         }
     }
+
+    public function crearUsuario($nombre, $apellidos, $email, $contraseña){
+        $sql = "INSERT INTO user(nombre, apellidos, email, pass) VALUES(:nombre, :apellidos, :email, :pass)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+        $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':pass', $contraseña, PDO::PARAM_STR);
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function borrarCita($id){
+        $sql = "DELETE FROM citas WHERE id = '$id' ";
+        $stmt = $this->db->prepare($sql);
+
+        try {
+            if ($stmt->execute()) {
+                    return true ; 
+                
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+
 }

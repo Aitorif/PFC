@@ -11,17 +11,20 @@ session_start();
     <link rel="stylesheet" href="estilos/editor.css">
     <link rel="stylesheet" href="estilos/login.css">
     <link rel="stylesheet" href="estilos/estilos.css">
-    
+    <link rel= "stylesheet" type= "text/css" herf= "http.//fonts.googleapis.com/css?family=Nunito+Sans">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="Rich-Text-Editor-jQuery-RichText/src/richtext.min.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.min.js"></script>
     <title>Clínica Logopédica Castiñeira</title>
 </head>
+<body>
+<section id="main-container">
 <?php
         include('header.php');
         include('bd.php');
 ?>
+
 <div id="presentacion">
             <div id="textoPresentacion">
                 <h2>¿Por qué nace la Clínica Castiñeira?</h2>
@@ -36,3 +39,7 @@ session_start();
             </div>
             <img src="./media/fondoCabecera.jpg" alt="">
         </div>
+
+
+</section>
+</body>

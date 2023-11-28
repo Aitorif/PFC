@@ -29,9 +29,20 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
     $user_id = $_SESSION['user_id'];
     $trabajador = $_SESSION['trabajador'];
     if($trabajador == true){
-        $result = $Crud->ejecutarConsulta("SELECT c.dia, c.hora, u.nombre, t.nombre FROM citas as c INNER JOIN trabajadores as t ON c.id_trabajador = t.id INNER JOIN user as u ON c.id_paciente = u.id WHERE id_trabajador = $user_id");
+        $result = $Crud->ejecutarConsulta("SELECT c.dia, c.hora, u.nombre as nombre_paciente, t.nombre as nombre_trabajador, c.id
+        FROM citas as c
+        INNER JOIN trabajadores as t ON c.id_trabajador = t.id
+        INNER JOIN user as u ON c.id_paciente = u.id
+        WHERE id_trabajador = $user_id
+        ORDER BY c.dia, SUBSTRING(c.hora, 1, 2), SUBSTRING(c.hora, 4, 5) DESC");
+        
     }else{
-        $result = $Crud->ejecutarConsulta("SELECT c.dia, c.hora, u.nombre, t.nombre FROM citas as c INNER JOIN trabajadores as t ON c.id_trabajador = t.id INNER JOIN user as u ON c.id_paciente = u.id WHERE id_paciente = $user_id");
+        $result = $Crud->ejecutarConsulta("SELECT c.dia, c.hora, u.nombre as nombre_paciente, t.nombre as nombre_trabajador, c.id
+        FROM citas as c
+        INNER JOIN trabajadores as t ON c.id_trabajador = t.id
+        INNER JOIN user as u ON c.id_paciente = $user_id
+        WHERE id_trabajador = t.id
+        ORDER BY c.dia, c.hora");
     }
    
     if($result->rowCount() == 0){
@@ -46,16 +57,17 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
     <div id="contenedor">
         <div id="citas" class="">
             <table>
-            <tr><td>Día</td><td>Hora</td><td>Logopeda</td><td>Paciente</td></tr>
+            <tr><td>Día</td><td>Hora</td><td>Paciente</td><td>Logopeda</td></tr>
             <?php
     
             foreach($citas as $cita){
-                echo "<tr><td>".$cita[0]."</td><td>".$cita[1]."</td><td>".$cita[2]."</td><td>".$cita[3]."</td></tr>";
+                echo "<tr><td>".$cita[0]."</td><td>".$cita[1]."</td><td>".$cita[2]."</td><td>".$cita[3]."</td><td> <button id='cancelarCita' id-target='".$cita[4]."'>Anular cita</button><td></tr>";
             }
 
             ?>
             </table>
             <button id='pedirCita'>Pide cita</button>
+            <?php } ?>
         <div id="formulario">
         
         </div>
@@ -66,7 +78,7 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
         $(document).ready(function(){
             let boton = $('#pedirCita');
             let divForm = $('#formulario');
-            boton.on("click", function(){
+            $("#pedirCita").on("click", function(){
                 $.ajax({
                     url: 'formularioCitas.php',
                     type: 'GET',
@@ -80,8 +92,25 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                  });
                  divForm.addClass('formularioActivo');
             })
+
+            $('#cancelarCita').on('click', function(){
+                let cita = $(this).attr('id-target');
+                let confirmacion = confirm("¿Estás seguro de que quieres borrar la cita seleccionada?");
+                if(confirmacion == true){
+                    $.ajax({
+                        type: "POST", 
+                        url: "borrarCita.php", 
+                        data: {
+                            cita: cita
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            window.location.reload();
+                        }
+                    })
+                }
+            });
         })
     </script>
 </body>
 
-<?php } ?>
