@@ -13,20 +13,16 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged" || $_SESSION['traba
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/editor.css">
-    <link rel="stylesheet" href="estilos/login.css">
     <link rel="stylesheet" href="estilos/estilos.css">
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="Rich-Text-Editor-jQuery-RichText/src/richtext.min.css">
+    <link rel="stylesheet" href="./Rich-Text-Editor-jQuery-RichText/src/richtext.min.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.min.js"></script>
+    <script type="text/javascript" src="./Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.js"></script>
     <title>Clínica Logopédica Castiñeira</title>
 </head>
 <script>
     $(document).ready(function() {
-        $('.content').richText(
-
-        );
+        $('.content').richText();
 
         $("#enviar").on("click", function() {
         event.preventDefault();

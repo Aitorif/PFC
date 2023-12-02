@@ -19,13 +19,31 @@ session_start();
     <title>Clínica Logopédica Castiñeira</title>
 </head>
 <body>
-<section id="main-container">
-<?php
-        include('header.php');
-        include('bd.php');
-?>
+    <section id="main-container">
+    <?php
+            include('header.php');
+            include('bd.php');
+    ?>
 
-<div id="presentacion">
+        <div id="presentacion">
+            <div class="home-category-slider-row" data-content-type="row" data-appearance="full-bleed" data-enable-parallax="0" data-parallax-speed="0.5" data-background-images="{}" data-background-type="image" data-video-loop="true" data-video-play-only-visible="true" data-video-lazy-load="true" data-video-fallback-src="" data-element="main" data-pb-style="XFGXN30"><div data-content-type="html" data-appearance="default" data-element="main" data-decoded="true">
+                <div class="cat-slider-container">
+
+                    <a class="cat-slider">
+                        <img src="./assets/uploads/slider1.jpg" alt="" />
+                    </a>
+
+                    <a class="cat-slider">
+                        <img src="./assets/uploads/slider2.jpg" alt="" />
+                    </a>
+
+                    <a class="cat-slider">
+                        <img src="./assets/uploads/slider3.jpg" alt="" />
+                    </a>
+
+                </div>
+            </div>
+</div>
             <div id="textoPresentacion">
                 <h2>¿Por qué nace la Clínica Castiñeira?</h2>
                 <p>
@@ -37,9 +55,6 @@ session_start();
                     Nuestro lema es: Prueba, siente y juega, pero sobre todo, disfruta del camino que haremos juntos.
                 </p>
             </div>
-            <img src="./media/fondoCabecera.jpg" alt="">
         </div>
-
-
-</section>
+    </section>
 </body>

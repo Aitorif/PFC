@@ -7,7 +7,7 @@
             $contraseña = trim($_POST['contraseña']);
             $comprobacion = $BaseDeDatos->comprobarUsuario($email, $contraseña, true);
             if($comprobacion === true){
-                $resultado = $BaseDeDatos->ejecutarConsulta("SELECT nombre, apellidos, email, id FROM trabajadores WHERE email = '$email'");
+                $resultado = $BaseDeDatos->ejecutarConsulta("SELECT nombre, apellidos, email, id, rol FROM trabajadores WHERE email = '$email'");
                 $datos = $resultado->fetch();
                 $datos["trabajador"] = true;
                 require_once('iniciarSesion.php');

@@ -2,13 +2,12 @@
   font-family: "Nunito Sans";
   src: url("../assets/Nunito_sans/NunitoSans-VariableFont_YTLC\,opsz\,wdth\,wght.ttf") format("truetype");
 }
-body {
-	margin: 0;
-	padding: 0;
-	font-family: 'Nunito Sans';
-  width: 100%;
-  height: 100%;
-
+html, body{
+  height:100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Nunito Sans";
 }
 
 .pngs{
@@ -20,6 +19,7 @@ main{
   background-color: #E6F5D9;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 a {
@@ -27,7 +27,19 @@ a {
   text-decoration: none;
 }
 
+/*GENERAL BUTTONS*/
 
+.btn{
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  border-radius: 5px;
+  width: 76px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  align-self: flex-end;
+}
 
 /*Header superior*/
 .flex-container{
@@ -56,6 +68,15 @@ a {
 
 /*Header 2*/
 
+#userIcon{
+ color: white;
+}
+
+#userIcon::before{
+  content: url("http://localhost/clinica_castineira/assets/uploads/userIcon.svg");
+  color: white;
+ }
+
 .Header{
   background-color: #0F79CD;
   margin: 0;
@@ -78,6 +99,21 @@ a {
 .login{
   font-size: 16px;
   font-weight: 500;
+}
+
+#logo{
+  width: auto;
+  height: 100%;
+}
+
+#logo img{
+  width: auto;
+  height: 100%;
+}
+
+#logo div{
+  width: 100%;
+    height: 100%;
 }
 
 #contNav{
@@ -114,6 +150,20 @@ nav{
 .menuItem:hover{
   border-bottom: 3px solid #69B1EA;
 }
+
+#opcionesHeader{
+      
+  background-color: white;
+  z-index: 99999;
+  position: absolute;
+  padding: 20px;;
+}
+
+#opcionesHeader a{
+  color: #3b3b3b;
+  
+}
+
 
 /*SubMenu*/
 
@@ -156,29 +206,146 @@ nav{
 
 /*Login*/
 
+#main-container{
+  background-color: #E4F8D2;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
 #linkLogUp{
   color: #777777;
 }
 
+#divLogin{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 400px;
+  border: solid 1px black;
+  justify-content:center;
+  align-items: center;
+  box-shadow: 0px 7px 17px -6px rgba(0,0,0,0.75);
+  border-radius: 21px;
+  padding-bottom: 29px;
+}
+
+#divLogUp{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 450px;
+  border: solid 1px black;
+  justify-content:center;
+  align-items: center;
+  box-shadow: 0px 7px 17px -6px rgba(0,0,0,0.75);
+  border-radius: 21px;
+  padding-bottom: 29px;
+}
+
+#divLogin form{
+  display: flex;
+  flex-direction: column;
+}
+
+input{
+  height: 30px;
+  width: 300px;
+  margin: 5px 0px 15px 0px;
+  padding: 0px 5px;
+}
+
+.flex-row{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#logInButton{
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  border-radius: 5px;
+  width: 76px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  align-self: flex-end;
+}
 
 
+.unshow{
+  display: none;
+  color: red;
+}
 
 
+/*Documentos*/
+
+#contenedor{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  padding-top: 7px;
+  background-color: #E4F8D2;
+}
+
+#options{
+  display: flex;
+  flex-direction: row;
+}
 
 
+#options #selector{
+ font-size: 16px;
+ font-weight: 500;
+ margin-left: 20px;
+}
 
+table td, table th{
+  padding: 10px 20px;
+}
 
+.table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Color para filas pares */
+}
 
+.table tr:nth-child(odd) {
+  background-color: #ffffff; /* Color para filas impares */
+}
 
-/*************/
+input[type="checkbox"]{
+  width: 20px;
+}
+
+#compartirDoc input{
+  margin-left: 10px;
+}
+
+#compartir{
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  width: fit-content;
+  height: auto;
+}
+
+/*HOME*/
+
 #presentacion{
   margin: 0;
   background-color: #E4F8D2;
   color: #000;
-  height: 400px;
   padding: 60px 80px;
-  display: flex;
-  justify-content: space-evenly;
+
 }
 
 #textoPresentacion{
@@ -195,15 +362,83 @@ nav{
     width: 500px;
 }
 
-#contenedor{
-  display: flex;
-  align-items: center;
-
+.home-category-slider-row{
+  width: 100%;
 }
 
-#documentos table{
- 
-  border: 1px solid blue;
+.cat-slider-container {
+  display: flex;
+  overflow: scroll;
+  gap: 10px;
+}
+.home-category-slider-row div div.cat-slider-container a.cat-slider img{
+  border-bottom: 2px solid transparent;
+  border-radius: 5px;
+  transition: border-bottom 0.3s ease;
+}
+
+/* HIDE SCROLLBARS */
+/* Chrome, Safari, Opera */
+.cat-slider-container {
+  scrollbar-width: none !important;
+}
+/* Firefox */
+.cat-slider-container::-webkit-scrollbar {
+  display: none !important;
+}
+/* IE, Edge */
+.cat-slider-container {
+  -ms-overflow-style: none !important;
+}
+
+.cat-slider-container .cat-slider img{
+  width: auto;
+  max-height: 300px;
+}
+
+#pagenotfound .cat-slider-container .cat-slider {
+  min-width:fit-content;
+}
+
+@media (max-width: 768px) {
+  .cat-slider-container .cat-slider img {
+      width: 190px;
+      height: 112px;
+      object-fit: cover;
+      border-radius: 5px;
+  }
+}
+.cat-slider-container .cat-slider p {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text) !important;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+.cat-slider-container .cat-slider:hover p{
+  text-decoration: none;
+  color: var(--primary) !important;
+}
+
+
+
+
+
+
+
+/*************/
+
+
+/*DOCUMENTOS*/
+
+.docButton{
+  padding: 11px;
+  margin: 10px;
+}
+
+#buttons{
+  margin-bottom: 20px;
 }
 
 #compartirDoc{

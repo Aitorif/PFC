@@ -28,7 +28,7 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
     $Crud = new Crud();
     $user_id = $_SESSION['user_id'];
     $trabajador = $_SESSION['trabajador'];
-    if($trabajador == true){
+    if($trabajador == true && $_SESSION['rol'] != "admin"){
         $result = $Crud->ejecutarConsulta("SELECT c.dia, c.hora, u.nombre as nombre_paciente, t.nombre as nombre_trabajador, c.id
         FROM citas as c
         INNER JOIN trabajadores as t ON c.id_trabajador = t.id
@@ -36,12 +36,19 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
         WHERE id_trabajador = $user_id
         ORDER BY c.dia, SUBSTRING(c.hora, 1, 2), SUBSTRING(c.hora, 4, 5) DESC");
         
+    }else if($trabajador == true && $_SESSION['rol'] == "admin"){
+        $result = $Crud->ejecutarConsulta("SELECT c.dia, c.hora, u.nombre as nombre_paciente, t.nombre as nombre_trabajador, c.id
+        FROM citas as c
+        INNER JOIN trabajadores as t ON c.id_trabajador = t.id
+        INNER JOIN user as u ON c.id_paciente = u.id
+        ORDER BY c.dia, SUBSTRING(c.hora, 1, 2), SUBSTRING(c.hora, 4, 5) DESC");
+    
     }else{
         $result = $Crud->ejecutarConsulta("SELECT c.dia, c.hora, u.nombre as nombre_paciente, t.nombre as nombre_trabajador, c.id
         FROM citas as c
         INNER JOIN trabajadores as t ON c.id_trabajador = t.id
-        INNER JOIN user as u ON c.id_paciente = $user_id
-        WHERE id_trabajador = t.id
+        INNER JOIN user as u ON c.id_paciente = u.id
+        WHERE id_paciente = $user_id
         ORDER BY c.dia, c.hora");
     }
    
@@ -51,23 +58,17 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
         echo "<button id='pedirCita'>Pide cita</button>";
     }else{
         $citas = $result->fetchAll();
-
+        $citasJSON = json_encode($citas);
 ?>
 <body>
     <div id="contenedor">
         <div id="citas" class="">
-            <table>
+            <table id="tablaCitas">
             <tr><td>Día</td><td>Hora</td><td>Paciente</td><td>Logopeda</td></tr>
-            <?php
-    
-            foreach($citas as $cita){
-                echo "<tr><td>".$cita[0]."</td><td>".$cita[1]."</td><td>".$cita[2]."</td><td>".$cita[3]."</td><td> <button id='cancelarCita' id-target='".$cita[4]."'>Anular cita</button><td></tr>";
-            }
-
-            ?>
             </table>
             <button id='pedirCita'>Pide cita</button>
             <?php } ?>
+        
         <div id="formulario">
         
         </div>
@@ -78,6 +79,22 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
         $(document).ready(function(){
             let boton = $('#pedirCita');
             let divForm = $('#formulario');
+            let tablaCitas = $('#tablaCitas');
+            try{
+                let citas = JSON.parse('<?php if(isset($citasJSON)){echo $citasJSON;} ?>');
+                for(let i = 0; i < citas.length; i++){
+                tablaCitas.append("<tr><td>"+citas[i]['dia']+"</td><td>"+citas[i]['hora']+"</td><td>"+citas[i]['nombre_paciente']+"</td><td>"+citas[i]['nombre_trabajador']+"</td><td> <button id='cancelarCita' id-target='"+citas[i]['id']+"'>Anular cita</button><td></tr>");
+            }
+            }catch(error){
+                console.log(error);
+            }
+
+            let filterDia = $('filterDia');
+            let filterHora = $('filterHora');
+            let filterPaciente = $('filterPaciente');
+
+
+
             $("#pedirCita").on("click", function(){
                 $.ajax({
                     url: 'formularioCitas.php',

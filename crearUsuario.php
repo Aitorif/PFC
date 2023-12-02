@@ -22,15 +22,17 @@
         include('header.php');
 ?>  
 <main>
-        <div id="divLogin">
-            <div id="textoPresentacion">
-                <form action="guardarUsuario.php" method="post">
-                    <label for="nombre">Nombre</label><input type="text" name="nombre" placeholder="Escribe tu nombre" required>
-                    <label for="apellidos">Apellidos</label><input type="text" name="apellidos" placeholder="Escribe tus apellidos" required>
-                    <label for="email">Email</label><input type="email" name="email" placeholder="Escribe tu email" required>
-                    <label for="contraseña">Contraseña</label><input type="password" name="contraseña" placeholder="Escribe tu contraseña" required> <!--<button id="showPassword"><i id="icon">Ver</i></button>-->
-                    <input type="submit" name="enviar">
-                    <?php if(isset($result)){echo $result;} ?>
-                </form> 
+    <section id="main-container" class="flex-container">
+        <div id="divLogUp">
+            <h1>Registrar nuevo usuario</h1>
+            <form action="guardarUsuario.php" method="post">
+                <label for="nombre">Nombre</label><input type="text" name="nombre" placeholder="Escribe tu nombre" required>
+                <label for="apellidos">Apellidos</label><input type="text" name="apellidos" placeholder="Escribe tus apellidos" required>
+                <label for="email">Email</label><input type="email" name="email" placeholder="Escribe tu email" required>
+                <label for="contraseña">Contraseña</label><input type="password" name="contraseña" placeholder="Escribe tu contraseña" required> <!--<button id="showPassword"><i id="icon">Ver</i></button>-->
+                <div class="flex-row"><input type="submit" name="enviar" id="logInButton"></div>
+                <?php if(isset($result)){echo $result;} ?>
+            </form> 
         </div>
+    </section>
 </main>

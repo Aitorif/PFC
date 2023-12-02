@@ -22,15 +22,21 @@
             exit();
         }
 ?>  
-<main>
-        <div id="divLogin">
-            <div id="textoPresentacion">
-                <form action="comprobarlogin.php" method="post">
-                    <label for="email">Email</label><input type="email" name="email" placeholder="Escribe tu email" required>
-                    <label for="email">Contraseña</label><input type="password" name="contraseña" placeholder="Escribe tu contraseña" required>
-                    <input type="hidden" name="trabajador">
-                    <input type="submit" name="enviar">
-                    <?php if(isset($error)){echo $error;} ?>
-                </form>
+<main class="main-login">
+    <header class="header" >
+        <div class="divHeader" style="height: fit-content">
+            <a href="index.php" style="height: fit-content" id="logo" ><div ><img style="width:200px; height:auto" src="./assets/CLINICA_CASTIÑEIRA.png" alt=""></div></a>
+        </div>    
+    </header>
+    <div id="divLogin">
+        <div id="textoPresentacion">
+            <form action="comprobarlogin.php" method="post">
+                <label for="email">Email</label><input type="email" name="email" placeholder="Escribe tu email" required>
+                <label for="email">Contraseña</label><input type="password" name="contraseña" placeholder="Escribe tu contraseña" required>
+                <input type="hidden" name="trabajador">
+                <input type="submit" name="enviar">
+                <?php if(isset($error)){echo $error;} ?>
+            </form>
         </div>
+    </div>
 </main>

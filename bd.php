@@ -176,6 +176,24 @@ class Crud {
         }
     }
 
+    public function crearUsuarioAdmin($nombre, $apellidos, $email, $dni, $rol, $contraseña){
+        $sql = "INSERT INTO trabajadores(nombre, pass, apellidos, dni, telefono, email, rol ) VALUES(:nombre, :pass, :apellidos, :dni, :telefono, :email, :rol )";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+        $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':pass', $contraseña, PDO::PARAM_STR);
+        $stmt->bindParam(':dni', $apellidos, PDO::PARAM_STR);
+        $stmt->bindParam(':telefono', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':rol', $rol, PDO::PARAM_STR);
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function borrarCita($id){
         $sql = "DELETE FROM citas WHERE id = '$id' ";
         $stmt = $this->db->prepare($sql);
@@ -190,6 +208,24 @@ class Crud {
         } catch (PDOException $e) {
             return $e->getMessage();
         }
+    }
+
+    public function guardarFactura($cliente, $fecha, $descripcion, $cantidad, $precioUnitario, $precioTotal){
+        $sql = "INSERT INTO facturas(fecha, descripcion, id_user, cantidad, precioUnitario, precioTotal )VALUES(:fecha, :descripcion, :id_user, :cantidad, :precioUnitario, :precioTotal)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+        $stmt->bindParam(':id_user', $cliente, PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+        $stmt->bindParam(':cantidad', $cantidad, PDO::PARAM_STR);
+        $stmt->bindParam(':precioUnitario', $precioUnitario, PDO::PARAM_STR);
+        $stmt->bindParam(':precioTotal', $precioTotal, PDO::PARAM_STR);
+        try {
+            $stmt->execute();
+            return $this->db->lastInsertId();
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+
     }
 
 
