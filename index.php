@@ -1,2 +1,2 @@
 <?php
-header('Location: home.php');
+header('Location: vistas/home.php');

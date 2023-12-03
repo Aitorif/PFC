@@ -2,10 +2,10 @@
 <?php 
 session_start();
 if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit();
 }
-include('bd.php');
+include('../modelo/bd.php');
 $Crud = new Crud();
 if($_SESSION['trabajador'] == true){
     $result = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos FROM user");
@@ -63,7 +63,7 @@ $arrayHoras =  json_encode($horas);
             console.log(paciente);
             if (dia && trabajador && paciente) {
                 $.ajax({
-                        url: 'citasPosibles.php',
+                        url: '../back/citasPosibles.php',
                         type: 'POST',
                         data: {
                             dia:dia,
@@ -112,7 +112,7 @@ $arrayHoras =  json_encode($horas);
             
             if(hora != undefined || hora != null){
                 $.ajax({
-                        url: 'guardarCita.php',
+                        url: '../back/guardarCita.php',
                         type: 'POST',
                         data: {
                             dia:diaFinal,

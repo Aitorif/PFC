@@ -6,7 +6,7 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
     exit();
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include('bd.php');
+    include('../modelo/bd.php');
     $Crud = new Crud();
     $user_id = $_SESSION['user_id'];
     $trabajador = $_SESSION['trabajador'];

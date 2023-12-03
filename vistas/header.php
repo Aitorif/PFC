@@ -1,17 +1,17 @@
 <header class="Header">
     <div class="flex-container">
         <div class="divContacto">
-            <div><img class="pngs" src="./media/telefono.png"/><span>981254789</span></div>
-            <div><img class="pngs" src="./media/email.png"/><span>ejemplo@clinicacastineira.com</span></div>
-            <div><a href="#"><img class="pngs" src="./media/insta.png"/></a><a href="#"><img class="pngs" src="media/facebook.png"/></a></div>  
+            <div><img class="pngs" src="../media/telefono.png"/><span>981254789</span></div>
+            <div><img class="pngs" src="../media/email.png"/><span>ejemplo@clinicacastineira.com</span></div>
+            <div><a href="#"><img class="pngs" src="../media/insta.png"/></a><a href="#"><img class="pngs" src="../media/facebook.png"/></a></div>  
         </div>
     </div>
     <div class="divHeader">
-        <a href="index.php" id="logo"><div ><img src="./assets/CLINICA_CASTIÑEIRA.png" alt=""></div></a>
+        <a href="index.php" id="logo"><div ><img src="../assets/CLINICA_CASTIÑEIRA.png" alt=""></div></a>
         <div id="contNav">
             <span><?php if(isset($_SESSION["nombre"])){ echo "<a id='account' class='login' href='#'><i id='userIcon'></i>Mi cuenta</a>";}else{echo "<a class='login' href='login.php'><i id='userIcon'></i></a>";} 
             if(isset($_COOKIE["login"]) && $_COOKIE["login"] == "loged"){
-                echo "<div id='opcionesHeader'><a href='datosUsuario.php'>Espacio personal</a><hr><a href='cerrarSesion.php'><button>Cerrar sesión</button></a></div>";
+                echo "<div id='opcionesHeader'><a href='datosUsuario.php'>Espacio personal</a><hr><a href='../back/cerrarSesion.php'><button>Cerrar sesión</button></a></div>";
             }?> </span>
             <nav>
                 <ul class="menu">
@@ -43,7 +43,6 @@
         $("document").ready(function(){
             let cuenta = $("#account");
             let menu = $("#opcionesHeader");
-
             menu.hide();
             cuenta.on("click", function(e) {
                 e.stopPropagation();

@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit();
 }
 ?>
@@ -12,19 +12,19 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos/editor.css">
+    <link rel="stylesheet" href="../estilos/editor.css">
 
-    <link rel="stylesheet" href="estilos/estilos.css">
+    <link rel="stylesheet" href="../estilos/estilos.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="Rich-Text-Editor-jQuery-RichText/src/richtext.min.css">
+  
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 -->  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.min.js"></script>
+   
     <title>Clínica Logopédica Castiñeira</title>
 </head>
 <?php 
     include('header.php');
-    include('bd.php');
+    include('../modelo/bd.php');
     $Crud = new Crud();
     $user_id = $_SESSION['user_id'];
     $trabajador = $_SESSION['trabajador'];
@@ -83,7 +83,7 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
             try{
                 let citas = JSON.parse('<?php if(isset($citasJSON)){echo $citasJSON;} ?>');
                 for(let i = 0; i < citas.length; i++){
-                tablaCitas.append("<tr><td>"+citas[i]['dia']+"</td><td>"+citas[i]['hora']+"</td><td>"+citas[i]['nombre_paciente']+"</td><td>"+citas[i]['nombre_trabajador']+"</td><td> <button id='cancelarCita' id-target='"+citas[i]['id']+"'>Anular cita</button><td></tr>");
+                tablaCitas.append("<tr><td>"+citas[i]['dia']+"</td><td>"+citas[i]['hora']+"</td><td>"+citas[i]['nombre_paciente']+"</td><td>"+citas[i]['nombre_trabajador']+"</td><td> <button class='cancelarCita' id-target='"+citas[i]['id']+"'>Anular cita</button><td></tr>");
             }
             }catch(error){
                 console.log(error);
@@ -110,24 +110,28 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                  divForm.addClass('formularioActivo');
             })
 
-            $('#cancelarCita').on('click', function(){
-                let cita = $(this).attr('id-target');
-                let confirmacion = confirm("¿Estás seguro de que quieres borrar la cita seleccionada?");
-                if(confirmacion == true){
-                    $.ajax({
-                        type: "POST", 
-                        url: "borrarCita.php", 
-                        data: {
-                            cita: cita
-                        },
-                        success: function(response) {
-                            console.log(response);
-                            window.location.reload();
-                        }
-                    })
-                }
-            });
-        })
+            for(let i = 0; i < $('.cancelarCita').length; i++){
+                $('.cancelarCita').eq(i).on("click", function(){
+                    console.log("asdasd");
+                    let cita = $(this).attr('id-target');
+                    let confirmacion = confirm("¿Estás seguro de que quieres borrar la cita seleccionada?");
+                    if(confirmacion == true){
+                        $.ajax({
+                            type: "POST", 
+                            url: "../back/borrarCita.php", 
+                            data: {
+                                cita: cita
+                            },
+                            success: function(response) {
+                                console.log(response);
+                                window.location.reload();
+                            }
+                        })
+                    }
+                });
+            }
+
+        });
     </script>
 </body>
 

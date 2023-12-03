@@ -1,5 +1,5 @@
 <?php
-include('bd.php');
+include('../modelo/bd.php');
 $Crud = new Crud();
 $dia = $_POST['dia'];
 $trabajador = $_POST['trabajador'];

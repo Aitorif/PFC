@@ -12,6 +12,6 @@ if($_SESSION["trabajador"] == false){
     $_SESSION["rol"] = $datos["rol"];
 }
 
-setcookie("login", "loged");
-header("Location: documentos.php");
+setcookie("login", "loged", 0 , "/");
+header("Location: ../index.php");
 exit();

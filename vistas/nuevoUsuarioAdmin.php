@@ -1,7 +1,7 @@
 <section id="main-container" class="flex-container">
     <div id="divLogUp" style="height: fit-content;">
         <h1>Registrar nuevo usuario</h1>
-        <form action="guardarUsuario.php" method="post">
+        <form action="../back/guardarUsuario.php" method="post">
             <label for="nombre">Nombre</label><input type="text" name="nombre" placeholder="Escribe tu nombre" required>
             <label for="apellidos">Apellidos</label><input type="text" name="apellidos" placeholder="Escribe tus apellidos" required>
             <label for="email">Email</label><input type="email" name="email" placeholder="Email" required>

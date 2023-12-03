@@ -6,7 +6,7 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
     exit();
 }
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    include('bd.php');
+    include('../modelo/bd.php');
     $Crud = new Crud();
     $cliente = $_GET["cliente"];
     $result = $Crud->ejecutarConsulta("SELECT nombre, apellidos, dni, direccion FROM user WHERE id = $cliente");

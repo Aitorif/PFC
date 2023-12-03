@@ -1,5 +1,5 @@
 <?php
-    require_once('bd.php');
+    require_once('../modelo/bd.php');
     if(isset($_POST['enviar'])){
         if(isset($_POST['trabajador'])){
             $BaseDeDatos = new Crud();
@@ -13,7 +13,7 @@
                 require_once('iniciarSesion.php');
             }else{
                 $error = "El email o la contraseña no son correctos";
-                require_once('admin-login.php');
+                require_once('../vista/admin-login.php');
             }
         }else{
             $BaseDeDatos = new Crud();
@@ -27,7 +27,7 @@
                 require_once('iniciarSesion.php');
             }else{
                 $error = "El email o la contraseña no son correctos";
-                require_once('login.php');
+                require_once('../vista/login.php');
             }
         }
 

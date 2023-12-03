@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit();
 }
 ?>
@@ -12,19 +12,18 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos/editor.css">
+    <link rel="stylesheet" href="../estilos/editor.css">
 
-    <link rel="stylesheet" href="estilos/estilos.css">
+    <link rel="stylesheet" href="../estilos/estilos.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="Rich-Text-Editor-jQuery-RichText/src/richtext.min.css">
-    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
--->  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.min.js"></script>
+    <link rel="stylesheet" href="../Rich-Text-Editor-jQuery-RichText/src/richtext.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.js"></script>
     <title>Clínica Logopédica Castiñeira</title>
 </head>
 <?php 
     include('header.php');
-    include('bd.php');
+    include('../modelo/bd.php');
     $Crud = new Crud();
     $user_id = $_SESSION['user_id'];
     $trabajador =$_SESSION['trabajador'];
@@ -90,8 +89,8 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
     
     <script>
         $(document).ready(function() {
-            var user_id = <?php echo $user_id; ?>;
-            var checks = $('.check');
+            let user_id = <?php echo $user_id; ?>;
+            let checks;
             let tabla = $('#tablaDocs');
             let titulo = $('#titleTable');
             let paginaActual = 1;
@@ -114,11 +113,12 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                     let nuevaFila = $("<tr></tr>");
                     nuevaFila.append("<td><input class='check' type='checkbox' value='"+data[i]['id']+"'/></td><td>"+data[i]['titulo']+"");
                     if(trabajador == true){
-                        nuevaFila.append("<td>"+data[i]['ultima_modificacion']+"</td><td><a style='color: black;' href='http://localhost/clinica_castineira/editor.php?id_document="+data[i]['id']+"'>Editar</a></td>");
+                        nuevaFila.append("<td>"+data[i]['ultima_modificacion']+"</td><td><a style='color: black;' href='http://localhost/clinica_castineira/vistas/editor.php?id_document="+data[i]['id']+"'>Editar</a></td>");
                     }
-                    nuevaFila.append("<td><a style='color: black;' target='_blank' href='http://localhost/clinica_castineira/prevista.php?id_document="+data[i]['id']+"'>Imprimir</a></td>");
+                    nuevaFila.append("<td><a style='color: black;' target='_blank' href='http://localhost/clinica_castineira/vistas/prevista.php?id_document="+data[i]['id']+"'>Imprimir</a></td>");
                     tabla.append(nuevaFila);
                 }
+                checks = $('.check');
             }
 
             function emailValidator(email) {
@@ -135,7 +135,7 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                 let indiceInicio = (pagina - 1) * 10;
                 $.ajax({
                             type: "POST", 
-                            url: "getDocumentos.php", 
+                            url: "../back/getDocumentos.php", 
                             data: {
                                 indiceInicio: indiceInicio
                             },
@@ -150,6 +150,41 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                             }
                 })
             }
+
+            $(document).on('change', '#selector', function() {
+                if ($(this).val() === 'compartir') {
+                    
+                    $('#compartirDoc').show();
+                    $('#compartir').show();
+                    $('#borrar').hide();
+                } else if($(this).val() === 'borrar'){
+                    $('#compartirDoc').hide();
+                    $('#compartir').hide();
+                    $('#borrar').show();
+                }else{
+                    $('#compartirDoc').hide();
+                    $('#compartir').hide();
+                    $('#borrar').hide();
+                }
+            });
+           
+        //    $("#selector").change(function() {
+        //         console.log($('#selector').val());
+        //         if ($(this).val() === 'compartir') {
+                    
+        //             $('#compartirDoc').show();
+        //             $('#compartir').show();
+        //             $('#borrar').hide();
+        //         } else if($(this).val() === 'borrar'){
+        //             $('#compartirDoc').hide();
+        //             $('#compartir').hide();
+        //             $('#borrar').show();
+        //         }else{
+        //             $('#compartirDoc').hide();
+        //             $('#compartir').hide();
+        //             $('#borrar').hide();
+        //         }
+        //     });
 
             $('#selTodo').on('click',function(){
                 
@@ -178,7 +213,7 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                     if(confirmacion == true){
                         $.ajax({
                             type: "POST", 
-                            url: "borrarDocumento.php", 
+                            url: "../back/borrarDocumento.php", 
                             data: {
                                 arraydoc_id: arraydoc_id,
                                 userid: user_id
@@ -202,13 +237,13 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                         arraydoc_id.push(checks[i].value);
                     }
                 }
-                console.log(arraydoc_id);
+                console.log(checks);
                 if(arraydoc_id.length > 0 && validEmail === true){
                     var confirmacion = confirm("¿Estás seguro de que quieres compartir los documentos seleccionados con "+email+"?");
                     if(confirmacion == true){
                         $.ajax({
                             type: "POST", 
-                            url: "compartirDocumento.php", 
+                            url: "../back/compartirDocumento.php", 
                             data: {
                                 arraydoc_id: arraydoc_id,
                                 email: email, 
@@ -229,22 +264,8 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
                     alert("No has seleccionado ningún documento para compartir");
                 }
             })
-
-            $('#selector').change(function() {
-                if ($(this).val() === 'compartir') {
-                    $('#compartirDoc').show();
-                    $('#compartir').show();
-                    $('#borrar').hide();
-                } else if($(this).val() === 'borrar'){
-                    $('#compartirDoc').hide();
-                    $('#compartir').hide();
-                    $('#borrar').show();
-                }else{
-                    $('#compartirDoc').hide();
-                    $('#compartir').hide();
-                    $('#borrar').hide();
-                }
-            });
+            
+            
         });
     </script>
 </body>
