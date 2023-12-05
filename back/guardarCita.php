@@ -9,8 +9,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $paciente = trim($_POST['paciente']);
     $trabajador = trim($_POST['trabajador']);
     $resultado = $Crud->registrarCita($paciente, $trabajador, $dia, $hora);
+    if($resultado != true){
+        http_response_code(500);
 
-    echo $resultado;
+        // Envía un mensaje de error en el cuerpo de la respuesta
+        echo json_encode(array('error' => $resultado));
+        exit();
+    }else{
+        echo $resultado;
+    }
+    
 
 }
 ?>

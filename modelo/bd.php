@@ -49,24 +49,21 @@ class Crud {
     }
     
 
-    public function actualizarDocumento($documento, $id){
-        $sql = "UPDATE documentos SET documento = '$documento', ultima_modificacion = NOW() WHERE id = '$id'";
-        $insertar = $this->db->prepare($sql);
+    public function actualizarDocumento($titulo, $documento, $id){
+        $sql = "UPDATE documentos SET documento = :documento, titulo=:titulo, ultima_modificacion = NOW() WHERE id = '$id'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':documento', $documento, PDO::PARAM_STR);
+        $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
         try{
-            $insertar->execute();
+            $stmt->execute();
             return true;
         }catch(PDOException $e){
             return $e->getMessage();
         }
 }
 
-    public function comprobarUsuario($email, $contraseña, $trabajador){
-        if($trabajador == true){
-            $resultado = $this->ejecutarConsulta("SELECT pass FROM trabajadores WHERE email = '$email'");
-        }else{
-            $resultado = $this->ejecutarConsulta("SELECT pass FROM user WHERE email = '$email'");
-        }
-
+    public function comprobarUsuario($email, $contraseña){
+        $resultado = $this->ejecutarConsulta("SELECT pass FROM user WHERE email = '$email'");
         $listado = $resultado->fetch();
         try{
             if($listado !== false){
@@ -148,7 +145,7 @@ class Crud {
     }
 
     public function registrarCita($id_paciente, $id_trabajador, $dia, $hora){
-        $sql = "INSERT IGNORE INTO citas(id_trabajador, id_paciente, dia, hora) VALUES(:id_trabajador, :id_paciente, :dia, '$hora')";
+        $sql = "INSERT INTO citas(id_trabajador, id_paciente, dia, hora) VALUES(:id_trabajador, :id_paciente, :dia, '$hora')";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id_trabajador', $id_trabajador, PDO::PARAM_STR);
         $stmt->bindParam(':id_paciente', $id_paciente, PDO::PARAM_STR);
@@ -161,13 +158,16 @@ class Crud {
         }
     }
 
-    public function crearUsuario($nombre, $apellidos, $email, $contraseña){
-        $sql = "INSERT INTO user(nombre, apellidos, email, pass) VALUES(:nombre, :apellidos, :email, :pass)";
+    public function crearUsuario($nombre, $apellidos, $email, $contraseña, $direccion, $dni, $telefono){
+        $sql = "INSERT INTO user(nombre, apellidos, email, pass, direccion, dni, telefono) VALUES(:nombre, :apellidos, :email, :pass, :direccion, :dni, :telefono)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
         $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':pass', $contraseña, PDO::PARAM_STR);
+        $stmt->bindParam(':direccion', $direccion, PDO::PARAM_STR);
+        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+        $stmt->bindParam(':telefono', $telefono, PDO::PARAM_STR);
         try {
             $stmt->execute();
             return true;
@@ -176,16 +176,19 @@ class Crud {
         }
     }
 
-    public function crearUsuarioAdmin($nombre, $apellidos, $email, $dni, $rol, $contraseña){
-        $sql = "INSERT INTO trabajadores(nombre, pass, apellidos, dni, telefono, email, rol ) VALUES(:nombre, :pass, :apellidos, :dni, :telefono, :email, :rol )";
+    public function crearUsuarioAdmin($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni, $rol){
+        $sql = "INSERT INTO user(nombre, apellidos, email, pass, direccion, dni, rol, trabajador, telefono) VALUES(:nombre, :apellidos, :email, :pass, :direccion, :dni, :rol, :trabajador, :telefono )";
         $stmt = $this->db->prepare($sql);
+        $trabajador = "true";
         $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
         $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':pass', $contraseña, PDO::PARAM_STR);
-        $stmt->bindParam(':dni', $apellidos, PDO::PARAM_STR);
-        $stmt->bindParam(':telefono', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':direccion', $direccion, PDO::PARAM_STR);
+        $stmt->bindParam(':dni', $dni, PDO::PARAM_STR);
+        $stmt->bindParam(':telefono', $telefono, PDO::PARAM_STR);
         $stmt->bindParam(':rol', $rol, PDO::PARAM_STR);
+        $stmt->bindParam(':trabajador', $trabajador, PDO::PARAM_STR);
         try {
             $stmt->execute();
             return true;

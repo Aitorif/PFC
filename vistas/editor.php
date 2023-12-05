@@ -1,10 +1,9 @@
 <?php
 session_start();
 
-if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged" || $_SESSION['trabajador'] != true){
-    header('Location: ../index.php');
-    exit();
-}
+include('../modelo/functional.php');
+comprobarLogin();
+comprobarTrabajador();
 ?>
 
 <!DOCTYPE html>
@@ -18,53 +17,10 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged" || $_SESSION['traba
     <link rel="stylesheet" href="../Rich-Text-Editor-jQuery-RichText/src/richtext.min.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="../Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.editor.js"></script>
     <title>Clínica Logopédica Castiñeira</title>
 </head>
-<script>
-    $(document).ready(function() {
-        $('.content').richText();
 
-        $("#enviar").on("click", function() {
-        event.preventDefault();
-        var titulo = $("#titulo").val();
-        var documento = $("#editortxt").val();
-        var userid = $("#userid").val();
-        // Realizar la solicitud AJAX
-        if(id_document == null){
-            $.ajax({
-            type: "POST", 
-            url: "../back/guardardocumento.php", 
-            data: {
-                titulo: titulo,
-                documento: documento,
-                userid: userid
-            },
-            success: function(response) {
-                // Guardar la respuesta de la bd
-                id_document =response;
-            }
-        })
-        }else{
-            $.ajax({
-                type: "POST", // Puedes usar POST o GET según tus necesidades
-                url: "../back/guardardocumento.php", 
-                data: {
-                    titulo: titulo,
-                    documento: documento,
-                    userid: userid,
-                    id_document: id_document
-                },
-                success: function(response) {
-                    
-                    console.log("ok");
-                }
-            });
-        }
-    });
-    })
-
-
-</script>
 
 <?php
         include('header.php');
@@ -98,8 +54,8 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged" || $_SESSION['traba
     if(isset ($_GET['id_document'])){
         $id_document = ($_GET['id_document']);
         echo "<script>
-        var id_document = $id_document;
-        var documento = '$documentoAntiguo'
+        let id_document = $id_document;
+        let documento = '$documentoAntiguo'
             $('#editortxt').html(documento);
             $('#titulo').attr('value', '$titulo');
         </script>";

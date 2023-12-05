@@ -400,6 +400,16 @@ input[type="checkbox"]{
   min-width:fit-content;
 }
 
+#carousel {
+  width: 300px; /* Ajusta según tus necesidades */
+  overflow: hidden;
+}
+
+.slide {
+  float: left;
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .cat-slider-container .cat-slider img {
       width: 190px;

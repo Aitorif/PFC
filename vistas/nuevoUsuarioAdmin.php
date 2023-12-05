@@ -6,7 +6,8 @@
             <label for="apellidos">Apellidos</label><input type="text" name="apellidos" placeholder="Escribe tus apellidos" required>
             <label for="email">Email</label><input type="email" name="email" placeholder="Email" required>
             <label for="phone">Teléfono</label><input type="phone" name="phone" placeholder="Teléfono" required>
-            <label for="dni">DNI</label><input type="text" name="dni" placeholder="DNI" required>
+            <label for="dni">DNI</label><input type="text" name="DNI" placeholder="DNI" required>
+            <label for="direccion">Direccion</label><input type="text" name="direccion" placeholder="Dirección" required>
             <label for="contraseña">Contraseña</label><input type="password" name="contraseña" placeholder="Contraseña" required> <!--<button id="showPassword"><i id="icon">Ver</i></button>-->
             <label for="tipo">Tipo de cuenta <select name="rol" id="tipo">
                 <option value="user">Usuario</option>

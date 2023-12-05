@@ -5,7 +5,7 @@ $_SESSION["user_id"] = $datos["id"];
 $_SESSION["nombre"] = $datos["nombre"];
 $_SESSION["apellidos"] = $datos["apellidos"];
 $_SESSION["email"] = $datos["email"];
-$_SESSION["trabajador"] = $datos["trabajador"];
+$_SESSION["trabajador"] = $booleano = filter_var($datos["trabajador"], FILTER_VALIDATE_BOOLEAN);
 if($_SESSION["trabajador"] == false){
     $_SESSION["rol"] = "paciente";
 }else{

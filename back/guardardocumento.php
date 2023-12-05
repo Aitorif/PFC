@@ -11,11 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $resultado = $Crud->guardarDocumento($documento, $usuario, $titulo);
     }else{
         $id = $_POST["id_document"];
-        $resultado = $Crud->actualizarDocumento($documento, $id);
+        $resultado = $Crud->actualizarDocumento($titulo, $documento, $id);
     }
 
     if($resultado[0] === true){
-        echo $resultado[1];
+        echo "El documento se ha guardado con éxito";
     }else{
         echo "Ha habido un error";
     }

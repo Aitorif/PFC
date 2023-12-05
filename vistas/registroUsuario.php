@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="../estilos/editor.css">
     <link rel="stylesheet" href="../estilos/login.css">
     <link rel="stylesheet" href="../estilos/estilos.css">
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
     <title>Clínica Logopédica Castiñeira</title>

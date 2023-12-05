@@ -7,45 +7,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!isset($_POST["inputAdmin"])){
         $nombre = trim($_POST['nombre']);
         $apellidos = trim($_POST['apellidos']);
+        $dni = trim($_POST['DNI']);
+        $telefono = trim($_POST['phone']);
         $email = trim($_POST['email']);
         $contraseña = trim($_POST['contraseña']);
-        $comprobacion = $Crud->comprobarUsuario($email, $contraseña, false);
+        $direccion = trim($_POST['direccion']);
+        $comprobacion = $Crud->comprobarUsuario($email, $contraseña);
         if($comprobacion === false){
-            $resultado = $Crud->crearUsuario($nombre, $apellidos, $email, $contraseña);
+            $resultado = $Crud->crearUsuario($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni);
             if($resultado === true){
                 $error = "Se ha creado el usuario con éxito";
-                header('Location: gestorUsuarios.php');
+                header('Location: ../vistas/login.php');
             }else{
                 $result= $resultado;
-                require_once('crearUsuario.php');
+                require_once('../vistas/crearUsuario.php');
             }
             
         }else{
             $result = "Ya hay un usuario con esta direccion de email";
-            require_once('crearUsuario.php');
+            require_once('../vista/crearUsuario.php');
         }
     }else{
         $nombre = trim($_POST['nombre']);
         $apellidos = trim($_POST['apellidos']);
-        $dni = trim($_POST['dni']);
+        $dni = trim($_POST['DNI']);
         $telefono = trim($_POST['phone']);
         $email = trim($_POST['email']);
         $contraseña = trim($_POST['contraseña']);
+        $direccion = trim($_POST['direccion']);
         $rol = trim($_POST['rol']);
         $comprobacion = $Crud->comprobarUsuario($email, $contraseña, true);
         if($comprobacion === false){
-            $resultado = $Crud->crearUsuarioAdmin($nombre, $apellidos, $email, $dni, $rol, $contraseña);
+            $resultado = $Crud->crearUsuarioAdmin($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni, $rol);
             if($resultado === true){
                 $error = "Se ha creado el usuario con éxito";
-                require_once('gestorUsuarios.php');
+                header('Location: ../vistas/gestorUsuarios.php');
             }else{
                 $result= $resultado;
-                require_once('nuevoUsuarioAdmin.php');
+                require_once('../vistas/nuevoUsuarioAdmin.php');
             }
             
         }else{
             $result = "Ya hay un usuario con esta direccion de email";
-            require_once('nuevoUsuarioAdmin.php');
+            require_once('../vistas/nuevoUsuarioAdmin.php');
         }
 
     }

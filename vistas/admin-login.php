@@ -1,4 +1,11 @@
 
+<?php
+        session_start();
+        if(isset($_COOKIE["login"]) && $_COOKIE["login"] == "loged"){
+            header('Location: ../index.php');
+            exit();
+        }
+?>  
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +19,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Clínica Logopédica Castiñeira</title>
 </head>
-<?php
-        session_start();
-        if(isset($_COOKIE["login"]) && $_COOKIE["login"] == "loged"){
-            header('Location: ../index.php');
-            exit();
-        }
-?>  
+
 <main class="main-login">
     <header class="header" >
         <div class="divHeader" style="height: fit-content">

@@ -3,7 +3,7 @@
 
 class Conexion{
     const SERVIDOR = "localhost:3307";
-    const DBNAME = "clinica_castineira";
+    const DBNAME = "clinica";
     const USUARIO = "root";
     const CONTRASEÑA = "abc123.";
     

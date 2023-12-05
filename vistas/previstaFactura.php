@@ -1,18 +1,21 @@
 <?php
 session_start();
-include('bd.php');
-if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
-    header('Location: ../index.php');
-    exit();
-}
+include('../modelo/bd.php');
+include('../modelo/functional.php');
+comprobarLogin();
+
 if(isset($_GET['id_factura'])){
     $Crud = new Crud();
     $id = $_GET['id_factura'];
     $user_id = $_SESSION['user_id'];
-    $resultado = $Crud->ejecutarConsulta("SELECT u.nombre, u.apellidos, u.dni, u.direccion, f.fecha, f.descripcion, f.cantidad, f.precioUnitario, f.precioTotal FROM facturas f INNER JOIN user u ON f.id_user = u.id WHERE f.id = '$id'");
+    $resultado = $Crud->ejecutarConsulta("SELECT u.nombre, u.apellidos, u.dni, u.direccion, f.id_user, f.fecha, f.descripcion, f.cantidad, f.precioUnitario, f.precioTotal FROM facturas f INNER JOIN user u ON f.id_user = u.id WHERE f.id = '$id'");
     $listado = $resultado->fetch();
+    if($_SESSION["trabajador"]== false && $listado["id_user"] != $_SESSION["user_id"]){
+        header('Location: ../index.php');
+        exit();
+    }
 }
-?>
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +27,7 @@ if(isset($_GET['id_factura'])){
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 -->  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../scripts/jquery.printarea.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.previstaDocumento.js"></script>
     <title>Clínica Logopédica Castiñeira</title>
 </head>
 
@@ -61,22 +64,4 @@ if(isset($_GET['id_factura'])){
     <h3>Total de la Factura: <?=$listado["precioTotal"]?>€</h3>
     </div>
 
-    <script>
-        $('document').ready(function(){
-            
-
-            $("#imprimir")[0].style.display = "none";
-            window.print();
-            $(window).on("afterprint", function(){
-                $("#imprimir")[0].style.display = "";
-            });
-            $("#imprimir").click(function (){
-                this.style.display = "none";
-                window.print();
-                this.style.display = "";
-            })
-        })
-      
-
-    </script>
  </body>

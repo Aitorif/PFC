@@ -16,6 +16,7 @@ session_start();
     <link rel="stylesheet" href="../Rich-Text-Editor-jQuery-RichText/src/richtext.min.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="../Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.home.js"></script>
     <title>Clínica Logopédica Castiñeira</title>
 </head>
 <body>
@@ -26,23 +27,20 @@ session_start();
     ?>
 
         <div id="presentacion">
-            <div class="home-category-slider-row" data-content-type="row" data-appearance="full-bleed" data-enable-parallax="0" data-parallax-speed="0.5" data-background-images="{}" data-background-type="image" data-video-loop="true" data-video-play-only-visible="true" data-video-lazy-load="true" data-video-fallback-src="" data-element="main" data-pb-style="XFGXN30"><div data-content-type="html" data-appearance="default" data-element="main" data-decoded="true">
-                <div class="cat-slider-container">
-
-                    <a class="cat-slider">
-                        <img src="../assets/uploads/slider1.jpg" alt="" />
-                    </a>
-
-                    <a class="cat-slider">
-                        <img src="../assets/uploads/slider2.jpg" alt="" />
-                    </a>
-
-                    <a class="cat-slider">
-                        <img src="../assets/uploads/slider3.jpg" alt="" />
-                    </a>
-
-                </div>
+        <div id="carousel">
+            <div class="slide">
+                <img src="../assets/uploads/slider1.jpg" alt="Imagen 1">
             </div>
+            <div class="slide">
+                <img src="../assets/uploads/slider2.jpg" alt="Imagen 2">
+            </div>
+            <div class="slide">
+                <img src="../assets/uploads/slider3.jpg" alt="Imagen 3">
+            </div>
+            <button class="prev">Anterior</button>
+    <button class="next">Siguiente</button>
+        </div>
+
 </div>
             <div id="textoPresentacion">
                 <h2>¿Por qué nace la Clínica Castiñeira?</h2>
