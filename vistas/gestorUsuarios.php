@@ -53,15 +53,14 @@ comprobarTrabajador();
             </table>
             <?php } ?>
 
-            <button id="crear">Crear usuario</button>
+            <button id="crear" class="btn">Crear usuario</button>
             <div id="nuevoUsuario"></div>
         </div>
     </div>
 
 
 <script>
-
+    let id = '<?php echo $_SESSION['user_id']; ?>'
     let trabajadores = '<?php echo $trabajadoresJSON; ?>';
     let usuarios = '<?php echo $usuariosJSON; ?>';
-
 </script>

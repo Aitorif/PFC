@@ -17,7 +17,7 @@ class Crud {
             $resultado = $this->db->query($sql);
             return $resultado;
         }catch(PDOException $e){
-            return false;
+            return $e->getMessage();
         }
     }
 
@@ -231,5 +231,42 @@ class Crud {
 
     }
 
+    public function actualizarUsuario($id, $pass, $imagen = "userphoto.png"){
+        $sql = "UPDATE user SET photo = :imagen, pass = :pass WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(":imagen", $imagen, PDO::PARAM_STR);
+        $stmt->bindParam(":pass", $pass, PDO::PARAM_STR);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 
+    public function actualizarRol($id, $rol){
+        $sql = "UPDATE user SET rol = :rol WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(":rol", $rol, PDO::PARAM_STR);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function borrarUsuario($id){
+        $sql = "DELETE FROM user WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }

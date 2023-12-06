@@ -12,7 +12,7 @@
         <div id="contNav">
             <span><?php if(isset($_SESSION["nombre"])){ echo "<a id='account' class='login' href='#'><i id='userIcon'></i>Mi cuenta</a>";}else{echo "<a class='login' href='login.php'><i id='userIcon'></i></a>";} 
             if(isset($_COOKIE["login"]) && $_COOKIE["login"] == "loged"){
-                echo "<div id='opcionesHeader'><h3 id='nombreUser' style='color: black'>".$_SESSION['nombre']."</h3><a href='datosUsuario.php'>Espacio personal</a><hr><a href='../back/cerrarSesion.php'><button>Cerrar sesión</button></a></div>";
+                echo "<div id='opcionesHeader'><a href='datosUsuario.php'>".$_SESSION['nombre']."</a><hr><a href='../back/cerrarSesion.php'><button>Cerrar sesión</button></a></div>";
             }?> </span>
             <nav>
                 <ul class="menu">

@@ -4,9 +4,9 @@
         $BaseDeDatos = new Crud();
         $email = trim($_POST['email']);
         $contraseña = trim($_POST['contraseña']);
-        $comprobacion = $BaseDeDatos->comprobarUsuario($email, $contraseña, false);
+        $comprobacion = $BaseDeDatos->comprobarUsuario($email, $contraseña);
         if($comprobacion === true){
-            $resultado = $BaseDeDatos->ejecutarConsulta("SELECT nombre, apellidos, email, id, rol, trabajador FROM user WHERE email = '$email'");
+            $resultado = $BaseDeDatos->ejecutarConsulta("SELECT nombre, apellidos, email, id, rol, trabajador, photo, pass FROM user WHERE email = '$email'");
             $datos = $resultado->fetch();
             require_once('iniciarSesion.php');
         }else{
