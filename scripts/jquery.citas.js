@@ -7,13 +7,6 @@
                 tablaCitas.append("<tr><td>"+citas[i]['dia']+"</td><td>"+citas[i]['hora']+"</td><td>"+citas[i]['nombre_paciente']+"</td><td>"+citas[i]['nombre_trabajador']+"</td><td> <button class='cancelarCita' id-target='"+citas[i]['id']+"'>Anular cita</button><td></tr>");
             }
 
-
-            let filterDia = $('filterDia');
-            let filterHora = $('filterHora');
-            let filterPaciente = $('filterPaciente');
-
-
-
             boton.on("click", function(){
                 $.ajax({
                     url: 'formularioCitas.php',

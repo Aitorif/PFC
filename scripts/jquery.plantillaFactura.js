@@ -9,10 +9,10 @@ $(document).ready(function() {
             },
             success: function(response) {
                 let data = JSON.parse(response);
-                $("#nombre").val(data[0].nombre);
-                $("#apellidos").val(data[0].apellidos);
-                $("#direccion").val(data[0].direccion);
-                $("#dni").val(data[0].dni);
+                $("#nombre").val(data.nombre);
+                $("#apellidos").val(data.apellidos);
+                $("#direccion").val(data.direccion);
+                $("#dni").val(data.dni);
 
             },
             error: function() {

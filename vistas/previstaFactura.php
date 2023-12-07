@@ -5,11 +5,10 @@ include('../modelo/functional.php');
 comprobarLogin();
 
 if(isset($_GET['id_factura'])){
-    $Crud = new Crud();
+    $bd = new Crud();
     $id = $_GET['id_factura'];
     $user_id = $_SESSION['user_id'];
-    $resultado = $Crud->ejecutarConsulta("SELECT u.nombre, u.apellidos, u.dni, u.direccion, f.id_user, f.fecha, f.descripcion, f.cantidad, f.precioUnitario, f.precioTotal FROM facturas f INNER JOIN user u ON f.id_user = u.id WHERE f.id = '$id'");
-    $listado = $resultado->fetch();
+    $listado = $bd->getFacturaById($id);
     if($_SESSION["trabajador"]== false && $listado["id_user"] != $_SESSION["user_id"]){
         header('Location: ../index.php');
         exit();

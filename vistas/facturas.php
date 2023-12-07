@@ -8,17 +8,7 @@ $Crud = new Crud();
 $user_id = $_SESSION['user_id'];
 $trabajador =$_SESSION['trabajador'];
 $trabajadorJSON = json_encode($_SESSION["trabajador"]);
-if($_SESSION['rol'] == "admin"){
-    $result = $Crud->ejecutarConsulta("SELECT COUNT(*) as total FROM facturas");
-}else{
-    $result = $Crud->ejecutarConsulta("SELECT COUNT(*) as total FROM facturas as f INNER JOIN user AS u ON f.id_user = u.id WHERE f.id_user = $user_id");
-}
-if($result != false){
-    $total = $result->fetch()['total'];
-
-}else{
-    $total = 0;
-}
+include("../back/getPaginasFacturas.php");
 $entradasPorPagina = 10;
 $totalPaginas = ceil($total / $entradasPorPagina);
 ?>
@@ -55,8 +45,11 @@ $totalPaginas = ceil($total / $entradasPorPagina);
                 <table id="tablaDocs" class="table">
                     <tr id="titleTable"><th>ID</th><th>Fecha</th><th></th>
                 </table>
-
-                <?php } ?>
+                <?php
+                    for($i = 1; $i <= $totalPaginas; $i++){
+                        echo "<a class='numero' style='color:#3498db; cursor: pointer'>$i</a>";
+                    }
+                 } ?>
             </div>
         </div>
     </section>

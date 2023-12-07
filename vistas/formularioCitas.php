@@ -4,16 +4,16 @@ session_start();
 include('../modelo/functional.php');
 comprobarLogin();
 include('../modelo/bd.php');
-$Crud = new Crud();
+$bd = new Crud();
 if($_SESSION['trabajador'] === true){
-    $result = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos FROM user WHERE trabajador = 'false'");
+    $result = $bd->getPacientes();
     $peticion = "Paciente";
 }else{
-    $result = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos FROM user WHERE trabajador = 'true'");
+    $result = $bd->getTrabajadores();
     $peticion = "Logopeda";
 }
 $users = $result->fetchAll();
-$horasres = $Crud->ejecutarConsulta("SELECT hora FROM citas_posibles");
+$horasres = $bd->ejecutarConsulta("SELECT hora FROM citas_posibles");
 $horas = $horasres->fetchAll();
 $arrayHoras =  json_encode($horas);
 ?>

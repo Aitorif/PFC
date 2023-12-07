@@ -7,10 +7,9 @@ if(!isset($_COOKIE["login"]) || $_COOKIE["login"] != "loged"){
 }
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     include('../modelo/bd.php');
-    $Crud = new Crud();
-    $cliente = $_GET["cliente"];
-    $result = $Crud->ejecutarConsulta("SELECT nombre, apellidos, dni, direccion FROM user WHERE id = $cliente");
-    $datos = $result->fetchAll();
+    $bd = new Crud();
+    $id = $_GET["cliente"];
+    $datos = $bd->getUserById($id);
     $datosJson = json_encode($datos);
     echo $datosJson;
 }

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Detectar cambios en el campo de fecha
 
     $("#peticion").change(function() {
         if (peticion == "Logopeda") {
@@ -74,7 +73,8 @@ $(document).ready(function() {
                         trabajador: trabajador
                     },
                     success: function(response) {
-                        console.log(response);
+                        console.log("guardada");
+                        window.location.reload();
                     },
                     error: function(error) {
                         console.error(error);

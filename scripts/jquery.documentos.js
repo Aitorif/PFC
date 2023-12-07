@@ -44,7 +44,7 @@ $(document).ready(function() {
         let indiceInicio = (pagina - 1) * 10;
         console.log(indiceInicio)
         $.ajax({
-                    type: "POST", 
+                    type: "GET", 
                     url: "../back/getDocumentos.php", 
                     data: {
                         indiceInicio: indiceInicio
@@ -55,8 +55,8 @@ $(document).ready(function() {
                             actualizaTabla(data);
                         }catch(error){
                             $('#documentos').html("<h2>Todavía no tienes ningún documento</h2>")
+                            console.log(response);
                         }
-                        
                     }
         })
     }

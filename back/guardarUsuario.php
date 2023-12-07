@@ -36,9 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contraseña = trim($_POST['contraseña']);
         $direccion = trim($_POST['direccion']);
         $rol = trim($_POST['rol']);
+        $trabajador = "true";
         $comprobacion = $Crud->comprobarUsuario($email, $contraseña, true);
         if($comprobacion === false){
-            $resultado = $Crud->crearUsuarioAdmin($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni, $rol);
+            $resultado = $Crud->crearUsuario($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni, $rol, $trabajador);
             if($resultado === true){
                 $error = "Se ha creado el usuario con éxito";
                 header('Location: ../vistas/gestorUsuarios.php');

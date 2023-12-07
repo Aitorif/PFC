@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $precioUnitario = trim($_POST["precio"]);
     $total = trim($_POST["total"]);
     $resultado = $Crud->guardarFactura($cliente, $fecha, $descripcion, $cantidad, $precioUnitario, $total);
-
     echo $resultado;
 
 }

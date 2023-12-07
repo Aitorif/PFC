@@ -23,15 +23,12 @@ comprobarTrabajador();
 <?php 
     include('header.php');
     include('../modelo/bd.php');
-    $Crud = new Crud();
+    $bd = new Crud();
     $user_id = $_SESSION['user_id'];
-    $resultTrabajadores = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos, dni, telefono, email, rol
-    FROM user WHERE trabajador = 'true'
-    ORDER BY nombre, apellidos DESC");
+    $rol = $_SESSION["rol"];
+    $resultTrabajadores = $bd->getTrabajadoresAdminOnly($rol);
 
-    $resultUsuarios = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos, email
-    FROM user WHERE trabajador = 'false'
-    ORDER BY nombre, apellidos DESC");
+    $resultUsuarios = $bd->getPacientesAdminOnly($rol);
     if($resultTrabajadores->rowCount() == 0 & $resultUsuarios->rowCount() == 0){
         
     }else{

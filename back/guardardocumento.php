@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $resultado = $Crud->actualizarDocumento($titulo, $documento, $id);
     }
 
-    if($resultado[0] === true){
+    if($resultado === true){
         echo "El documento se ha guardado con éxito";
     }else{
         echo "Ha habido un error";

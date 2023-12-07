@@ -3,19 +3,10 @@ session_start();
 
 include('../modelo/functional.php');
 comprobarLogin();
-include('../modelo/bd.php');
-$Crud = new Crud();
 $user_id = $_SESSION['user_id'];
 $trabajador =$_SESSION['trabajador'];
 $trabajadorJSON = json_encode($_SESSION["trabajador"]);
-if($_SESSION['trabajador'] == true){
-    $formShare = "formularioCompartir.php";
-    $result = $Crud->ejecutarConsulta("SELECT COUNT(*) as total FROM documentos as d INNER JOIN user as t ON d.propietario = t.id WHERE d.propietario = $user_id");
-    $total = $result->fetch()['total'];
-}else{
-    $result = $Crud->ejecutarConsulta("SELECT COUNT(*) as total FROM documentos as d INNER JOIN documento_compartido as dc ON d.id = dc.id_documento INNER JOIN user AS t ON dc.id_trabajador = t.id WHERE dc.id_user = $user_id");
-    $total = $result->fetch()['total'];
-}
+include("../back/getPaginas.php");
 $entradasPorPagina = 10;
 $totalPaginas = ceil($total / $entradasPorPagina);
 ?>
@@ -42,7 +33,6 @@ include('header.php');
     <div id="contenedor">
     <h1>Mis documentos</h1>
         <div id="documentos" class="">
-
             <form method="post">
             <?php if($trabajador == true){
                 echo "<div id='buttons'><a href='editor.php' class='docButton btn'>Nuevo documento</a>";
@@ -77,7 +67,6 @@ include('header.php');
                     for($i = 1; $i <= $totalPaginas; $i++){
                         echo "<a class='numero' style='color:#3498db; cursor: pointer'>$i</a>";
                     }
-
                 ?>
 
             </div>

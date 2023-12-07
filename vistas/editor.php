@@ -31,14 +31,13 @@ comprobarTrabajador();
         <form action="" method="post" id="formTexto">
         <?php 
             if(isset($_GET['id_document'])){
-                $Crud = new Crud();
-                $id = $_GET['id_document'];
+                $bd = new Crud();
+                $id_document = $_GET['id_document'];
                 $user_id = $_SESSION['user_id'];
-                $resultado = $Crud->ejecutarConsulta("SELECT documento, titulo FROM documentos WHERE id = '$id' AND propietario = '$user_id'");
-                $listado = $resultado->fetch();
+                $listado = $bd->getDocById($id_document, $user_id);
                 $documentoAntiguo = $listado['documento'];
                 $titulo = $listado['titulo'];
-                echo "<input type='hidden' name='id_document' value=$id>";
+                echo "<input type='hidden' name='id_document' value=$id_document>";
             }
             
         ?>

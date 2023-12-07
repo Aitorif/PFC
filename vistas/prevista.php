@@ -4,14 +4,18 @@ include('../modelo/bd.php');
 include('../modelo/functional.php');
 comprobarLogin();
 
+
 if(isset($_GET['id_document'])){
-    $Crud = new Crud();
-    $id = $_GET['id_document'];
+    $bd = new Crud();
+    $id_document = $_GET['id_document'];
     $user_id = $_SESSION['user_id'];
-    $resultado = $Crud->ejecutarConsulta("SELECT documento, titulo FROM documentos WHERE id = '$id'");
-    $listado = $resultado->fetch();
-    $documento = $listado['documento'];
-    $titulo = $listado['titulo'];
+    $listado = $bd->getDocById($id_document, $user_id);
+
+    if($listado !== true && $listado !== false){
+        $documento = $listado['documento'];
+        $titulo = $listado['titulo'];
+    }
+
 }
 ?> 
 <!DOCTYPE html>
@@ -41,5 +45,6 @@ if(isset($_GET['id_document'])){
     <script>
         let documento = '<?php echo $documento ;?>';
         let titulo = '<?php echo $titulo;?>';
+        console.log(titulo);
     </script>
 </body>
