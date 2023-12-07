@@ -29,9 +29,8 @@ comprobarTrabajador();
     $resultTrabajadores = $bd->getTrabajadoresAdminOnly($rol);
 
     $resultUsuarios = $bd->getPacientesAdminOnly($rol);
-    if($resultTrabajadores->rowCount() == 0 & $resultUsuarios->rowCount() == 0){
+    if($resultTrabajadores->rowCount() > 0 && $resultUsuarios->rowCount() > 0){
         
-    }else{
         $usuarios = $resultUsuarios->fetchAll();
         $usuariosJSON = json_encode($usuarios);
         $trabajadores = $resultTrabajadores->fetchAll();

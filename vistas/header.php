@@ -31,7 +31,7 @@
             <div class="subMenu">
                 <ul class="submenu">
                     <a href="./documentos.php"><li class="submenuItem">Mis Documentos</li></a>
-                    <a href="./registrarCita.php"><li class="submenuItem">Citas</li></a>
+                    <a href="./citas.php"><li class="submenuItem">Citas</li></a>
                     <?php if($_SESSION["rol"] == "admin"){?><a href="./gestorUsuarios.php"><li class="submenuItem">Usuarios</li></a> <?php } ?>
                 </ul>
             </div>

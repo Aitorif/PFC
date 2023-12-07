@@ -43,9 +43,8 @@ comprobarLogin();
             <?php } ?>
         
         <div id="formulario">
-        
         </div>
-
+        <div id="overlay"></div>
         </div>
     </div>
     <script>

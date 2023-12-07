@@ -3,7 +3,7 @@
 require_once("../modelo/bd.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
-    $Crud = new Crud();
+    $bd = new Crud();
     if(!isset($_POST["inputAdmin"])){
         $nombre = trim($_POST['nombre']);
         $apellidos = trim($_POST['apellidos']);
@@ -12,9 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = trim($_POST['email']);
         $contraseña = trim($_POST['contraseña']);
         $direccion = trim($_POST['direccion']);
-        $comprobacion = $Crud->comprobarUsuario($email, $contraseña);
+        $comprobacion = $bd->comprobarUsuario($email, $contraseña);
         if($comprobacion === false){
-            $resultado = $Crud->crearUsuario($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni);
+            $resultado = $bd->crearUsuario($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni);
             if($resultado === true){
                 $error = "Se ha creado el usuario con éxito";
                 header('Location: ../vistas/login.php');
@@ -37,9 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $direccion = trim($_POST['direccion']);
         $rol = trim($_POST['rol']);
         $trabajador = "true";
-        $comprobacion = $Crud->comprobarUsuario($email, $contraseña, true);
+        $comprobacion = $bd->comprobarUsuario($email, $contraseña, true);
         if($comprobacion === false){
-            $resultado = $Crud->crearUsuario($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni, $rol, $trabajador);
+            $resultado = $bd->crearUsuario($nombre, $apellidos, $email, $contraseña, $direccion, $telefono, $dni, $rol, $trabajador);
             if($resultado === true){
                 $error = "Se ha creado el usuario con éxito";
                 header('Location: ../vistas/gestorUsuarios.php');
