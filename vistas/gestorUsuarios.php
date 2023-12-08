@@ -51,6 +51,7 @@ comprobarTrabajador();
 
             <button id="crear" class="btn">Crear usuario</button>
             <div id="nuevoUsuario"></div>
+            <div id="overlay"></div>
         </div>
     </div>
 

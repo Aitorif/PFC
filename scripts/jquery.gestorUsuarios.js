@@ -12,18 +12,35 @@ $(document).ready(function() {
     let tableHeaderTrabajadores = "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Email</td><td>DNI</td><td>Teléfono</td><td>Rol</td></tr>";
     let data;   
     let idCambio = {};
+
+    
+    function salirFormulario(){
+        $("#overlay").toggle();
+        $("#nuevoUsuario").html("");
+    }
+
+    
+
     $("#crear").on("click", function(){
+        let salir = $('<button>', {
+            text: 'x',
+            click: salirFormulario,
+            class: "salir btn",
+            id: "salir"
+        });
         $.ajax({
                 url: 'nuevoUsuarioAdmin.php',
                 type: 'GET',
                 success: function(response) {
                     // Actualizar el contenido del div con la respuesta del archivo PHP
                     $("#nuevoUsuario").html(response);
+                    $("#divLogUp").append(salir);
+                    $("#overlay").toggle();
                 },
                 error: function() {
                     console.error('Error al cargar el contenido');
                 }
-             });
+             }); 
     });
 
     function actualizarUsuarios(){
