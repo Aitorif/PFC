@@ -35,11 +35,12 @@ comprobarLogin();
 ?>
 <body>
     <div id="contenedor">
+        <h1>Citas</h1>
         <div id="citas" class="">
-            <table id="tablaCitas">
+            <table id="tablaCitas" class="table">
             <tr><td>Día</td><td>Hora</td><td>Paciente</td><td>Logopeda</td></tr>
             </table>
-            <button id='pedirCita'>Pide cita</button>
+            <button id='pedirCita' class="btn">Pide cita</button>
             <?php } ?>
         
         <div id="formulario">

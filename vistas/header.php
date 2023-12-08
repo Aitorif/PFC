@@ -23,12 +23,18 @@
                 </ul>
             </nav>
             <nav id="menuMovil">
-                <img src="../assets/uploads/burguer.svg" alt="">
-                <ul class="menu">
+                <div id="divBurguer"><img id="burguerMenu "src="../assets/uploads/buguer.svg" alt=""></div>
+                <ul id="sideMenu" class="menu">
                     <a href="index.php"><li class="menuItem">Inicio</li></a>
                     <a href="#"><li class="menuItem">Sobre nosotras</li></a>
                     <a href="#"><li class="menuItem">Nuestro equipo</li></a>
                     <a href="#"><li class="menuItem">Contacto</li></a>
+                    <?php
+                    if(isset($_COOKIE["login"])){
+                        ?>
+                    <a href="./documentos.php"><li  class="menuItem">Mis Documentos</li></a>
+                    <a href="./citas.php"><li  class="menuItem">Citas</li></a>
+                    <?php if($_SESSION["rol"] == "admin"){?><a href="./gestorUsuarios.php"><li class="menuItem">Usuarios</li></a> <?php }} ?>
                 </ul>
             </nav>
         </div>
@@ -36,7 +42,7 @@
     <?php
     if(isset($_COOKIE["login"])){
         ?>
-        <div class="sub-container">
+        <div id="header3" class="sub-container">
             <div class="subMenu">
                 <ul class="submenu">
                     <a href="./documentos.php"><li class="submenuItem">Mis Documentos</li></a>

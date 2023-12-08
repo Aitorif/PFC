@@ -24,10 +24,10 @@ comprobarTrabajador();
     include('../modelo/bd.php');
     $Crud = new Crud();
 
-    $result = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos FROM user");
+    $result = $Crud->ejecutarConsulta("SELECT id, nombre, apellidos FROM user WHERE trabajador = 'false'");
     $users = $result->fetchAll();
 ?>
-    <div id="contenedor">
+    <div id="contenedorFacturas">
     <h1>Factura</h1>
     <select name='peticion' id='peticion'>
         <option value="0" style="display:none">Selecciona una paciente para autocompletar</option>
@@ -35,7 +35,7 @@ comprobarTrabajador();
             echo "<option value='".$user['id']."'>".$user['nombre']." ".$user['apellidos']."</option>";
         }?>
     </select>
-    <form id="formfactura" action="plantillaFactura.php" method="post" style="max-width: 100px" >
+    <form id="formfactura" action="plantillaFactura.php" method="post" style="width: 100%" >
     <table style="max-width: 100%" id="formfactura">
         <tr>
             <td>Nombre del Cliente:  <input type="text" name="nombre" id="nombre" required></td>
@@ -50,7 +50,7 @@ comprobarTrabajador();
             <td>Fecha: <input type="date" name="fecha" required id="fecha"></td>
         </tr>
     </table>
-    <h2>Detalle de la Factura</h2>
+    <h2 style="width: 100%">Detalle de la Factura</h2>
     <table style="max-width:600px" border="1">
         <tr>
             <th>Descripción</th>

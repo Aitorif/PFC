@@ -4,7 +4,7 @@
             let tablaCitas = $('#tablaCitas');
 
             for(let i = 0; i < citas.length; i++){
-                tablaCitas.append("<tr><td>"+citas[i]['dia']+"</td><td>"+citas[i]['hora']+"</td><td>"+citas[i]['nombre_paciente']+"</td><td>"+citas[i]['nombre_trabajador']+"</td><td> <button class='cancelarCita' id-target='"+citas[i]['id']+"'>Anular cita</button><td></tr>");
+                tablaCitas.append("<tr><td>"+citas[i]['dia']+"</td><td>"+citas[i]['hora']+"</td><td>"+citas[i]['nombre_paciente']+"</td><td>"+citas[i]['nombre_trabajador']+"</td><td> <button class='cancelarCita btn' id-target='"+citas[i]['id']+"'>Anular cita</button></td></tr>");
             }
 
             function salirFormulario(){
@@ -39,7 +39,6 @@
 
             for(let i = 0; i < $('.cancelarCita').length; i++){
                 $('.cancelarCita').eq(i).on("click", function(){
-                    console.log("asdasd");
                     let cita = $(this).attr('id-target');
                     let confirmacion = confirm("¿Estás seguro de que quieres borrar la cita seleccionada?");
                     if(confirmacion == true){

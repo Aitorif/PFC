@@ -34,8 +34,8 @@ $totalPaginas = ceil($total / $entradasPorPagina);
 
     ?>
     <section id="main-container">
-        <div id="contenedor">
-            <a href="datosUsuario.php">Mis datos</a>
+        <div id="contenedorUsuario">
+            <a href="datosUsuario.php" class="side-btn">Mis datos</a>
             <span class="side-btn">Mis facturas</span>
             <div id="info">
                 <?php

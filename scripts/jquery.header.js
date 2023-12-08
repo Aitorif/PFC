@@ -1,6 +1,7 @@
 $("document").ready(function(){
     let cuenta = $("#account");
     let menu = $("#opcionesHeader");
+    let burguerMenu = $("#divBurguer");
     menu.hide();
     cuenta.on("click", function(e) {
         e.stopPropagation();
@@ -19,6 +20,10 @@ $("document").ready(function(){
 
     $(document).on("click", function() {
         menu.hide();
+    });
+    console.log(burguerMenu);
+    burguerMenu.on("click", function(){
+        $("#sideMenu").slideToggle();
     });
 
 });

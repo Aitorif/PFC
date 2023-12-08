@@ -38,6 +38,7 @@ comprobarTrabajador();
 ?>
 <body>
     <div id="contenedor">
+        <h1>Usuarios</h1>
         <div id="citas" class="">
             <select name="selector" id="selector">
             <option value="" style="display:none">Selecciona un tipo de usuario</option>

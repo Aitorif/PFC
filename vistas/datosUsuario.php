@@ -25,9 +25,12 @@ comprobarLogin();
         include('header.php');
     ?>
     <section id="main-container">
-        <div id="contenedor">
-            <span class="side-btn">Mis datos</span>
-            <a href="facturas.php">Mis facturas</a>
+        <div id="contenedorUsuario">
+            <div id="botones" style="width:15%">
+                <span class="side-btn">Mis datos</span>
+                <a href="facturas.php" class="side-btn">Mis facturas</a>
+            </div>
+
             <div id="info">
                 <div id="foto-contenedor">
                     <img style="max-width: 200px" src="../assets/uploads/user-img/<?= $_SESSION['foto']?>" alt="foto de usuario">
@@ -37,8 +40,8 @@ comprobarLogin();
                     <label for="nombre">Nombre <input type="text" value="<?= $_SESSION['nombre']?>" readonly ></label>
                     <label for="apellidos">Apellidos <input type="text" value="<?= $_SESSION['apellidos']?>" readonly ></label>
                     <label for="email">Email <input type="email" id="email" value="<?= $_SESSION['email']?>" readonly ></label>
-                    <label for="contraseña">Contraseña<input type="password" id="contraseña" value="<?= $_SESSION['pass']?>"><button id="showPassword"><i id="icon">Ver</i></button></label>
-                    <button id="guardar">Guardar datos</button>
+                    <label for="contraseña">Contraseña<input type="password" id="contraseña" value="<?= $_SESSION['pass']?>"><button id="showPassword" class="btn">Ver</button></label>
+                    <button id="guardar" class="btn">Guardar datos</button>
                     <div id="pedirContraseña">
                         <label for="contraseña">Introduce tu contraseña<input type="password" id="contraseñaAComprobar">
                         <button id="aceptar" class="btn">Aceptar</button>

@@ -89,7 +89,7 @@ class Crud {
         } catch (PDOException $e) {
             return $e->getMessage();
         }
-    }
+    } 
 
     public function getTrabajadores(){
         $result = $this->ejecutarConsulta("SELECT id, nombre, apellidos FROM user WHERE trabajador = 'true'");
