@@ -5,3 +5,4 @@ include('../modelo/bd.php');
     $trabajador = $_SESSION['trabajador'];
     $rol = $_SESSION["rol"];
     $result = $bd->getCitas($rol, $user_id, $trabajador);
+

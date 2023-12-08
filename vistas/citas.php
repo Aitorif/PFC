@@ -31,6 +31,7 @@ comprobarLogin();
         echo "<button id='pedirCita'>Pide cita</button>";
     }else{
         $citas = $result->fetchAll();
+        var_dump($citas);
         $citasJSON = json_encode($citas);
 ?>
 <body>

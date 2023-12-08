@@ -172,10 +172,10 @@ INSERT INTO `facturas` (`id`, `fecha`, `descripcion`, `id_user`, `cantidad`, `pr
 	(000007, '2023-12-15', 'Consulta médica', 3, 1, 50, 50),
 	(000008, '2023-12-16', 'Análisis clínicos', 3, 2, 30, 60),
 	(000009, '2023-12-17', 'Tratamiento especializado', 3, 1, 80, 80),
-	(000010, '2023-12-16', 'Consulta médica', 8, 1, 50, 50),
+	(000010, '2023-12-16', 'Consulta medica', 8, 1, 50, 50),
 	(000011, '2023-12-17', 'Radiografía', 8, 1, 40, 40),
 	(000012, '2023-12-18', 'Medicamentos', 8, 3, 10, 30),
-	(000013, '2023-12-17', 'Consulta médica', 9, 1, 50, 50),
+	(000013, '2023-12-17', 'Consulta medica', 9, 1, 50, 50),
 	(000014, '2023-12-18', 'Estudios de laboratorio', 9, 2, 25, 50),
 	(000015, '2023-12-19', 'Terapia ocupacional', 9, 1, 70, 70),
 	(000016, '2023-12-18', 'Consulta médica', 10, 1, 50, 50),
@@ -188,15 +188,15 @@ INSERT INTO `facturas` (`id`, `fecha`, `descripcion`, `id_user`, `cantidad`, `pr
 -- Volcando estructura para tabla clinica.user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `apellidos` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `email` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `pass` varchar(12) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `photo` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL DEFAULT 'userphoto.png',
-  `direccion` varchar(300) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `dni` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
-  `rol` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL DEFAULT 'user',
-  `trabajador` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL DEFAULT '0',
+  `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `apellidos` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `pass` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `photo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'userphoto.png',
+  `direccion` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `dni` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `rol` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'user',
+  `trabajador` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
   `telefono` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -205,9 +205,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 DELETE FROM `user`;
 INSERT INTO `user` (`id`, `nombre`, `apellidos`, `email`, `pass`, `photo`, `direccion`, `dni`, `rol`, `trabajador`, `telefono`) VALUES
 	(3, 'Aitor', 'Iglesias Franjo', 'aitor@clinicacastineira.com', 'aitor', '3foto.png', 'c/Ángel del Castillo, 29', '638184210', 'admin', 'true', NULL),
-	(8, 'Juan', 'Gómez Pérez', 'juan@gmail.com', 'contraseña1', 'foto1.png', 'Calle 123, Ciudad A', '123456789A', 'user', 'false', '123-456-789'),
-	(9, 'María', 'López García', 'maria@yahoo.com', 'contraseña2', 'foto2.png', 'Avenida XYZ, Ciudad B', '987654321B', 'user', 'false', '987-654-321'),
-	(10, 'Pedro', 'Martínez Rodríguez', 'pedro@hotmail.com', 'contraseña3', 'foto3.png', 'Calle Principal, Ciudad C', '111111111C', 'admin', 'true', '111-222-333'),
+	(8, 'Juan', 'Gomez Perez', 'juan@gmail.com', 'contraseña1', 'foto1.png', 'Calle 123, Ciudad A', '123456789A', 'user', 'false', '123-456-789'),
+	(9, 'Maria', 'Lopez Garcia', 'maria@yahoo.com', 'contraseña2', 'foto2.png', 'Avenida XYZ, Ciudad B', '987654321B', 'user', 'false', '987-654-321'),
+	(10, 'Pedro', 'Martinez Rodriguez', 'pedro@hotmail.com', 'contraseña3', 'foto3.png', 'Calle Principal, Ciudad C', '111111111C', 'admin', 'true', '111-222-333'),
 	(11, 'Laura', 'Sánchez Fernández', 'laura@gmail.com', 'contraseña4', 'foto4.png', 'Carrera 456, Ciudad D', '222222222D', 'admin', 'true', '444-555-666');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
