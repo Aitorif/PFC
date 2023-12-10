@@ -53,7 +53,7 @@ if(!isset($_POST["inputAdmin"])){
         
     } else {
 
-        $resultado = $crud->actualizarUsuario($id, $email, $pass, $archivo);
+        $resultado = $crud->actualizarUsuario($id, $pass);
         if($resultado === true){
             echo "Se ha actualizado con éxito";
             $_SESSION["email"] = $email;
