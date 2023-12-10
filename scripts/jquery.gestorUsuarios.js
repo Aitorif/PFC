@@ -9,7 +9,7 @@ $(document).ready(function() {
     }
     let tablaCitas = $("#tablaCitas");
     let tableHeaderUsuarios = "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Email</td></tr>";
-    let tableHeaderTrabajadores = "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Email</td><td>DNI</td><td>Teléfono</td><td>Rol</td></tr>";
+    let tableHeaderTrabajadores = "<tr><td>ID</td><td>Nombre</td><td>Apellidos</td><td>Teléfono</td><td>DNI</td><td>Email</td><td>Rol</td></tr>";
     let data;   
     let idCambio = {};
 
