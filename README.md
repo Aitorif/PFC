@@ -110,6 +110,7 @@ Instalación y Configuración
 1.- Clonar el Repositorio: git clone https://github.com/Aitorif/PFC.git
 2.- Configurar la Base de Datos: Importar el archivo clinica.sql y configurar las credenciales en conexion.php.
 Uso del Sistema
+3.- Llámale a la carpeta "clinica_castineira"
 Acceder a la página de inicio.
 Iniciar sesión.
 Navegar a "Mis Datos" para ver y editar información personal. Esto podemos hacerlo clicando en la foto de usuario del header para abrir el desplegable
