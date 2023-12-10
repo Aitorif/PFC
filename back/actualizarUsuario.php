@@ -33,7 +33,7 @@ if(!isset($_POST["inputAdmin"])){
             $resultado = $crud->actualizarUsuario($id, $pass, $archivo, $archivoAntiguo);
             
             if($resultado === true){
-                if (file_exists($archivoAntiguo) && $archivoAntiguo != $directorio_destino."userphoto.png") {
+                if (file_exists($archivoAntiguo) && $archivoAntiguo != $directorio_destino."userphoto.png" && $archivoAntiguo != $directorio_destino.$_SESSION['foto']) {
                     unlink($archivoAntiguo);
                     echo "La foto ha sido eliminada correctamente.";
                 } else {
