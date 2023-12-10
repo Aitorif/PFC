@@ -112,7 +112,7 @@ class Crud {
 
     public function getPacientesAdminOnly($rol){
         if($rol === "admin"){
-            $result = $this->ejecutarConsulta("SELECT id, nombre, apellidos FROM user WHERE trabajador = 'false'");
+            $result = $this->ejecutarConsulta("SELECT id, nombre, apellidos, email FROM user WHERE trabajador = 'false'");
             return $result;
         }
     }
